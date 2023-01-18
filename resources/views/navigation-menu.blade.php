@@ -69,7 +69,8 @@
                     </div>
                 @endif
 
-                <!-- Settings Dropdown -->
+                <!-- Settings Dropdown
+                      Muestra una imagen estándar cuando no se está logueado o la imagen del usuario cuando si se está-->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">

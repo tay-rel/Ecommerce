@@ -9,6 +9,7 @@
         </section>
     </div>
 
+
     <script>
         new Glider(document.querySelector('.glider'), {
             slidesToShow: 5.5,
@@ -21,5 +22,4 @@
             }
         });
     </script>
-
 </x-app-layout>

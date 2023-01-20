@@ -26,9 +26,4 @@
         <button aria-label="Next" class="glider-next">»</button>
         <div role="tablist" class="dots"></div>
     </div>
-
-
-   <!-- <div>
-        {{ $category }}
-    </div>-->
 </div>

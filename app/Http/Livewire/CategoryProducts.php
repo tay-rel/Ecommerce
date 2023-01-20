@@ -11,7 +11,9 @@ class CategoryProducts extends Component
     public $products = [];
     public function loadProducts()
     {
-        $this->products = $this->category->products;
+        //Solo debemos mostrar los publicados.
+        //vamos a limitar la cantidad de productos  con take
+        $this->products = $this->category->products()->where('status', 2)->take(15)->get();
         $this->emit('glider', $this->category->id);
     }
     public function render()

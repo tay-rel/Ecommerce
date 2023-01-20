@@ -8,7 +8,7 @@
 </style>
 <!-- Nosotros vamos a definir
 la variable ‘open’ a ‘false’ que controlará que el elemento no sea mostrado.-->
-<header class="bg-trueGray-700  sticky top-0" x-data="dropdown()">
+<header class="bg-trueGray-700  sticky top-0 z-50" x-data="dropdown()">
     <div class="container flex items-center h-16 justify-between md:justify-start">
         <!--a variable cambie a true y por tanto se muestre el listado.-->
         <a :class="{'bg-opacity-100 text-orange-500': open}" x-on:click="show()" class="flex flex-col items-center justify-center order-last md:order-first px-6 sm:px-4 bg-white bg-opacity-25 text-white cursor-pointer font-semibold h-full">

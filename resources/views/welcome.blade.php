@@ -1,5 +1,5 @@
-<x-app-layout>
 
+<x-app-layout>
     <div class="container-menu py-8">
         <section>
             <h1 class="text-lg uppercase font-semibold text-gray-700">
@@ -9,8 +9,9 @@
         </section>
     </div>
 
-
+    @push('scripts')
     <script>
+        Livewire.on('glider', function () {
         new Glider(document.querySelector('.glider'), {
             slidesToShow: 5.5,
             slidesToScroll: 5,
@@ -21,5 +22,7 @@
                 next: '.glider-next'
             }
         });
+        });
     </script>
+    @endpush
 </x-app-layout>

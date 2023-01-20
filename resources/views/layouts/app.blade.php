@@ -37,8 +37,8 @@
             </main>
             @stack('modals')
             </div>
-
-            <!--queremos que se ejecute en todas nuestras páginas-->
+        @livewireScripts
+        <!--queremos que se ejecute en todas nuestras páginas-->
             <script>
                 function dropdown(){
                     return {
@@ -63,6 +63,7 @@
                     }
                 }
             </script>
-
+        <!--colocar el código JS de la vista welcome para que se cargue en el layout usando las directivasde blade-->
+        @stack('scripts')
     </body>
 </html>

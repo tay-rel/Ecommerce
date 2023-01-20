@@ -9,7 +9,7 @@
 <!-- Nosotros vamos a definir
 la variable ‘open’ a ‘false’ que controlará que el elemento no sea mostrado.-->
 <header class="bg-trueGray-700  sticky top-0" x-data="dropdown()">
-    <div class="container-menu flex items-center h-16 justify-between md:justify-start">
+    <div class="container flex items-center h-16 justify-between md:justify-start">
         <!--a variable cambie a true y por tanto se muestre el listado.-->
         <a :class="{'bg-opacity-100 text-orange-500': open}" x-on:click="show()" class="flex flex-col items-center justify-center order-last md:order-first px-6 sm:px-4 bg-white bg-opacity-25 text-white cursor-pointer font-semibold h-full">
             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -29,7 +29,7 @@ la variable ‘open’ a ‘false’ que controlará que el elemento no sea most
         </div>
 
         <!--Muestra un dropdown-->
-        <div class="mx-6 relative  hidden md:block">
+        <div class="ml-3  mx-6 relative  hidden md:block">
             @auth
             <x-jet-dropdown align="right" width="48">
                 <x-slot name="trigger">
@@ -119,9 +119,6 @@ categoría se cambia lo que mostramos-->
             </div>
         </div>
 
-
-        <!--Menu para pantallas pequeñas-->
-
         <div class="bg-white h-full overflow-y-auto">
             <div class="container-menu bg-gray-200 py-3 mb-2">
                 @livewire('search')
@@ -139,22 +136,21 @@ categoría se cambia lo que mostramos-->
                 @endforeach
             </ul>
 
-            <!--En vez dee usar los componentes se usaran enlaces para el login o registro mediante js-->
-
             <p class="text-trueGray-500 px-6 my-2">USUARIOS</p>
-            <!--antes de comprobar si el usuario está autenticado o no,-->
 
             @livewire('cart-movil')
 
             @auth
-                <a href="{{ route('profile.show') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
-                        <span class="flex justify-center w-9">
-                        <i class="far fa-address-card"></i>
-                        </span>
+                <a href="{{ route('profile.show') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
+hover:text-white">
+                    <span class="flex justify-center w-9">
+                    <i class="far fa-address-card"></i>
+                    </span>
                     Perfil
                 </a>
                 <a href=""
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
+                   onclick="event.preventDefault();
+document.getElementById('logout-form').submit()"
                    class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
                     <span class="flex justify-center w-9">
                     <i class="fas fa-sign-out-alt"></i>
@@ -165,20 +161,21 @@ categoría se cambia lo que mostramos-->
                     @csrf
                 </form>
             @else
-                <a href="{{ route('login') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                <a href="{{ route('login') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
+hover:text-white">
                         <span class="flex justify-center w-9">
                         <i class="fas fa-user-circle"></i>
                         </span>
                     Iniciar sesión
                 </a>
-                <a href="{{ route('register') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
-                        <span class="flex justify-center w-9">
-                        <i class="fas fa-fingerprint"></i>
-                        </span>
+                <a href="{{ route('register') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
+hover:text-white">
+                    <span class="flex justify-center w-9">
+                    <i class="fas fa-fingerprint"></i>
+                    </span>
                     Registrar
                 </a>
-                @endauth
-
+            @endauth
         </div>
     </nav>
 </header>

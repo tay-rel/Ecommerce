@@ -11,7 +11,12 @@ class CategoryFilter extends Component
     use WithPagination;
 
     //Da informacion al componente
-    public $category;
+    public $category , $subcategoria, $marca;
+    public function limpiar()
+    {
+        $this->reset(['subcategoria', 'marca']);
+    }
+
     public function render()
     {
         $products = $this->category

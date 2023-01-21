@@ -99,7 +99,7 @@ la variable ‘open’ a ‘false’ que controlará que el elemento no sea most
                 <ul class="bg-white">
                     @foreach($categories as $category)
                         <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
-                            <a href="" class="py-2 px-4 text-sm flex items-center">
+                            <a href="{{ route('categories.show', $category) }}" class="py-2 px-4 text-sm flex items-center">
                                 <span class="flex justify-center w-9">
                                 {!! $category->icon !!}
                                 </span>
@@ -126,7 +126,7 @@ categoría se cambia lo que mostramos-->
             <ul class="bg-white">
                 @foreach($categories as $category)
                     <li class="text-trueGray-500 hover:bg-orange-500 hover:text-white">
-                        <a href="" class="py-2 px-4 text-sm flex items-center">
+                        <a href="{{ route('categories.show', $category) }}" class="py-2 px-4 text-sm flex items-center">
                                 <span class="flex justify-center w-9">
                                 {!! $category->icon !!}
                                 </span>

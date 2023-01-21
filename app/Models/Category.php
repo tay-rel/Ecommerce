@@ -20,4 +20,11 @@ class Category extends Model
     public function products(){
         return $this->hasManyThrough(Product::class, Subcategory::class);
     }
+
+    //Debemos usar URLs
+    //amigables. Y recordemos que cada categoría tenía un slug.
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

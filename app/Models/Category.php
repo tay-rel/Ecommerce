@@ -25,6 +25,7 @@ class Category extends Model
     //amigables. Y recordemos que cada categoría tenía un slug.
     public function getRouteKeyName()
     {
+        //le indicamos que debe mostrar el slug y no el id
         return 'slug';
     }
 }

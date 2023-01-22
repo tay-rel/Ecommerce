@@ -9,11 +9,13 @@ use Livewire\WithPagination;
 
 class CategoryFilter extends Component
 {
-    //la paginacion es dinamica,
+
     use WithPagination;
 
-    //Da informacion al componente
+    //por defecto es list
+    public $view = 'list';
     public $category , $subcategoria, $marca;
+
     public function limpiar()
     {
         $this->reset(['subcategoria', 'marca']);

@@ -6,8 +6,15 @@ use Livewire\Component;
 
 class AddCartItem extends Component
 {
+    public $product;
+    public $quantity;
     public $qty = 1;
 
+    //cantidad que es respectiva al stock
+    public function mount()
+    {
+        $this->quantity = $this->product->quantity;
+    }
     public function decrement()
     {
         $this->qty--;

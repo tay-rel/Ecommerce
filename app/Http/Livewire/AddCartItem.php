@@ -13,6 +13,7 @@ class AddCartItem extends Component
     public $qty = 1;
     public $options = [];
 
+
     //cantidad que es respectiva al stock
     public function mount()
     {

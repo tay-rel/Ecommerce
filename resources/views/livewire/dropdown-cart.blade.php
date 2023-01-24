@@ -19,7 +19,13 @@ red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{{ C
                         <img class="h-15 w-20 object-cover mr-4" src="{{ $item->options->image }}" alt="">
                         <article class="flex-1">
                             <h1 class="font-bold">{{ $item->name }}</h1>
-                            <p class="">Cant: {{ $item->qty }}</p>
+                            <!--Solo se muestre en donde estan los colores-->
+                            <div class="flex">
+                                <p class="">Cant: {{ $item->qty }}</p>
+                                @isset($item->options['color'])
+                                    <p class="mx-2">- Color: {{ __(ucfirst($item->options['color'])) }}</p>
+                                @endisset
+                            </div>
                             <p>{{ $item->price }} &euro;</p>
                         </article>
                     </li>

@@ -39,6 +39,10 @@ class AddCartItem extends Component
             'weight' => 550,
             'options' => $this->options,
         ]);
+        //Queremos que cuando se añada un ítem
+        //al carrito de compras desde add-cart-item, la clase AddCartItem le comunique a la otra clase DropdownCart
+        //que se ha producido este hecho, y así el numerito del carrito aumente sin tener que actualizar la página
+        $this->emitTo('dropdown-cart', 'render');//cuyo primer parámetro es a que vista queremos llamar y como se llama el evento
     }
     public function render()
     {

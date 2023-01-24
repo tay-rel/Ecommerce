@@ -28,3 +28,6 @@ Route::get('categories/{category}', [CategoryController::class, 'show'])->name('
 
 Route::get('products/{product}', [ProductsController::class, 'show'])->name('products.show');
 
+Route::get('/deletecart', function () {
+    \Cart::destroy();
+});

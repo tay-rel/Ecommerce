@@ -21,9 +21,8 @@ class AddCartItem extends Component
     //cantidad que es respectiva al stock
     public function mount()
     {
-        $this->quantity = $this->product->quantity;
-        //Cuando añadamos un elemento al carrito,
-        //también enviaremos una imagen.
+        //calcula el stock menos la cantidad agregada
+        $this->quantity = qty_available($this->product->id);
         $this->options['image'] = Storage::url($this->product->images->first()->url);
     }
     public function decrement()
@@ -44,6 +43,11 @@ class AddCartItem extends Component
             'weight' => 550,
             'options' => $this->options,
         ]);
+        $this->quantity = qty_available($this->product->id);
+        //una vez que pinchemos en el botón ‘agregar al carrito de compras’, la cantidad
+        //seleccionable del producto regrese al valor de 1
+        $this->reset('qty');
+
         //Queremos que cuando se añada un ítem
         //al carrito de compras desde add-cart-item, la clase AddCartItem le comunique a la otra clase DropdownCart
         //que se ha producido este hecho, y así el numerito del carrito aumente sin tener que actualizar la página

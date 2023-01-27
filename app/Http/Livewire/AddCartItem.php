@@ -11,7 +11,11 @@ class AddCartItem extends Component
     public $product;
     public $quantity;
     public $qty = 1;
-    public $options = [];
+    //los productos que estan enviando se debe asegurar que recibe la informacións
+    public $options = [
+        'color_id' => null,
+        'size_id' => null,
+    ];
 
 
     //cantidad que es respectiva al stock

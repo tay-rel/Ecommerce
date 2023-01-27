@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,4 +37,20 @@ class Product extends Model
     {
         return 'slug';
     }
-}
+    //accesores , que me devuelve el stock del producto que eligo
+    public function getStockAttribute()
+    {
+        if ($this->subcategory->size) {//si me da true , necesita que de talla y color
+            return ColorSize::whereHas('size.product', function (Builder $query) {//hacer consultas a las relaciones
+                $query->where('id', $this->id);
+            })->sum('quantity');//que sume lo que tenemos almacenado
+        } elseif ($this->subcategory->color) {//esto da color
+            return ColorProduct::whereHas('product', function (Builder $query) {
+                $query->where('id', $this->id);
+            })->sum('quantity');
+        } else {
+            return $this->quantity;
+        }
+    }
+
+    }

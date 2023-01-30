@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::get('/', WelcomeController::class);
+
+Route::get('search', SearchController::class)->name('search');
 
 //apunta los enlaces
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');

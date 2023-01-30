@@ -1,8 +1,11 @@
 <div class="flex-1 relative x-data">
-    <x-jet-input wire:model="search" type="text" class="flex w-full" placeholder="¿Estás buscando algún producto?"></x-jet-input>
-    <button class="absolute top-0 right-0 w-12 h-full bg-orange-500 flex items-center justify-center rounded-r-md">
-        <x-search size="35" color="white"></x-search>
-    </button>
+    <form action="{{ route('search') }}" autocomplete="off" method="get">
+        <x-jet-input name="name" wire:model="search" type="text" class="flex w-full"
+                     placeholder="¿Estás buscando algún producto?"></x-jet-input>
+        <button class="absolute top-0 right-0 w-12 h-full bg-orange-500 flex items-center justify-center rounded-r-md">
+            <x-search size="35" color="white"></x-search>
+        </button>
+    </form>
     <div class="absolute w-full mt-1 hidden" :class="{ 'hidden' : !$wire.open } " @click.away="$wire.open = false">
         <!--Muestra la tarjeta de la busqueda-->
         <!--La clase se agrega y se quita dinamicamente y el evento click es cuando pincha fuera-->

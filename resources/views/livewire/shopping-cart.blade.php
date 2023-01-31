@@ -33,13 +33,15 @@ Color: {{ __(ucfirst($item->options->color)) }}
                             </div>
                         </div>
                     </td>
-                    <td>
+                    <td class="text-center">
                         <span>{{ $item->price }} &euro;</span>
                         <a class="ml-6 cursor-pointer hover:text-red-600">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
+                    <!--Vista agrega carrito desde carrito-->
                     <td>
+                    <div class="flex justify-center">
                         @if($item->options->size)
                             @livewire('update-cart-item-size', ['rowId' => $item->rowId], key($item->rowId))
                         @elseif($item->options->color)
@@ -47,8 +49,12 @@ Color: {{ __(ucfirst($item->options->color)) }}
                         @else
                             @livewire('update-cart-item', ['rowId' => $item->rowId], key($item->rowId))
                         @endif
+                    </div>
                     </td>
-                    <td></td>
+                    <!--Vista total desde carrito-->
+                    <td class="text-center">
+                        {{ $item->price * $item->qty }} &euro;
+                    </td>
                 </tr>
             @endforeach
             </tbody>

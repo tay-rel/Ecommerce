@@ -8,7 +8,7 @@ use Tests\DuskTestCase;
 
 class ExampleTest extends DuskTestCase
 {
-    use RefreshDatabase;
+   // use RefreshDatabase;
 
     /**
      * A basic browser test example.
@@ -19,8 +19,9 @@ class ExampleTest extends DuskTestCase
     {
 
         $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                ->assertSee('Correo electrónico');
+            $browser->visit('/login')///login
+                ->assertSee('Correo electrónico')//Correo electronico
+                ->screenshot('prueba');//captura error
         });
     }
 }

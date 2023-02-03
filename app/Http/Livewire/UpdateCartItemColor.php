@@ -17,7 +17,7 @@ class UpdateCartItemColor extends Component
         $this->qty = $item->qty;
 
         $color = Color::where('name', $item->options->color)->first();
-        $this->quantity = qty_available($item->id, $color->id);
+        $this->quantity = qty_available($item->id, $color->id)  + $this->qty;
     }
 
     public function decrement()

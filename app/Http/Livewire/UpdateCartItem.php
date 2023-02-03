@@ -14,7 +14,7 @@ class UpdateCartItem extends Component
         //en item quiero recuperar el producto
         $item = Cart::get($this->rowId);
         $this->qty = $item->qty;
-        $this->quantity = qty_available($item->id);//almacenamos la informacion del stock
+        $this->quantity = qty_available($item->id) + $this->qty;    //almacenamos la informacion del stock ( (15 - qty = 5) + 5 )
     }
     public function decrement()
     {

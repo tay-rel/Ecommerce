@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Livewire\CreateOrder;
 use App\Http\Livewire\ShoppingCart;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
 
 Route::get('/', WelcomeController::class);
 
@@ -34,8 +31,7 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
+//Si queremos acceder y no estamos autenticados, automáticamente nos redirigirá a la vista de login.
+Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
 
-Route::get('/deletecart', function () {
-    \Cart::destroy();
-});
 

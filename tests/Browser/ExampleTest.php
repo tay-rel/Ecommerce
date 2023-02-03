@@ -19,9 +19,9 @@ class ExampleTest extends DuskTestCase
     {
 
         $this->browse(function (Browser $browser) {
-            $browser->visit('/login')///login
-                ->assertSee('Correo electrónico')//Correo electronico
-                ->screenshot('prueba');//captura error
+            $browser->visit('/')///login
+            ->assertSee('Categorías')//Correo electronico
+            ->screenshot('prueba');//captura error
         });
     }
 }

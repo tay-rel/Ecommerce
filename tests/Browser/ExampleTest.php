@@ -2,21 +2,20 @@
 
 namespace Tests\Browser;
 
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class ExampleTest extends DuskTestCase
 {
-   // use RefreshDatabase;
+    use RefreshDatabase;
 
-    /**
-     * A basic browser test example.
-     *
-     * @return void
-     */
+
+    /**@test*/
     public function testBasicExample()
     {
+        $category = Category::factory()->create();//
 
         $this->browse(function (Browser $browser) {
             $browser->visit('/')///login

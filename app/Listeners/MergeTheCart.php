@@ -2,7 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\Login;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,8 @@ class MergeTheCart
      */
     public function handle(Login $event)
     {
-        //
+        //debe verificar si tenemos un registro cuando iniciamos sesion
+        //y fuciona lo que hay en la bbdd con los items
+        Cart::merge(auth()->user()->id);
     }
 }

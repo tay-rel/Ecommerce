@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubcategoryFactory extends Factory
@@ -17,6 +18,7 @@ class SubcategoryFactory extends Factory
             'image' => 'subcategories/' . $this->faker->picsum(storage_path('app/public/subcategories'), 640, 480, null, false),
             'name'=>  $this->faker->sentence(),
             'slug'=>  $this->faker->sentence(),
+            'category_id' => Category::factory(),
         ];
     }
 }

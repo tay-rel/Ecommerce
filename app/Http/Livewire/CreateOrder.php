@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Department;
+use App\Models\Order;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
 class CreateOrder extends Component
@@ -11,7 +13,7 @@ class CreateOrder extends Component
     public $department_id = '', $city_id = '', $district_id = '';
     public $address, $reference;
     public $envio_type = 1;
-    public $contact, $phone;
+    public $contact, $phone,  $shipping_cost;
 
     public $rules = [
         'contact' => 'required',
@@ -30,19 +32,29 @@ class CreateOrder extends Component
             $rules['reference'] = 'required';
         }
         $this->validate($rules);
+
+        //la clase Order y comenzaremos a darle valor a sus
+        //propiedades (que son las columnas de la tabla orders)
+        $order = new Order();
+        $order->user_id = auth()->user()->id;
+        $order->contact = $this->contact;
+        $order->phone = $this->phone;
+        $order->envio_type = $this->envio_type;
+        $order->shipping_cost = 0;
+        $order->total = $this->shipping_cost + Cart::subtotal();
+        $order->content = Cart::content();
+        $order->save();//se crea un nuevo registro
+
+        Cart::destroy();
+        return redirect()->route('orders.payment', $order);
     }
     public function mount()
     {
         $this->departments = Department::all();
     }
 
-    /* Si el usuario elige la opción de Envío a domicilio y presiona el botón
-sin rellenar los campos específicos, la validación no pasa*/
-
     public function updatedEnvioType($value)
     {
-        //$envio_type y si su valor
-        //es 1 (si cambia es porque era 2) entonces eliminamos los errores de validación de los campos:
         if ($value == 1) {
             $this->resetValidation([
                 'department_id',
@@ -53,6 +65,8 @@ sin rellenar los campos específicos, la validación no pasa*/
             ]);
         }
     }
+
+
 
     public function render()
     {

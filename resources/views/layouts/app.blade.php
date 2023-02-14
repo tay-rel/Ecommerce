@@ -46,10 +46,6 @@
             <script>
                 function dropdown(){
                     return {
-
-                        //para no tener que pinchar en las categorías
-                        //cada vez que actualicemos la página, vamos
-                      // a cambiar el valor de la variable open a true por defecto luego se pone a false.
                         open: false,
                         show(){
                             if(this.open){

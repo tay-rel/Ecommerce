@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     <div class="grid grid-cols-5 gap-6 container-menu py-8">
         <div class="col-span-3">
             <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
@@ -73,24 +73,24 @@
         <div class="col-span-2">
             <div class="bg-white rounded-lg shadow-lg px-6 pt-6">
                 <div class="flex justify-between items-center mb-4">
-                        <img class="h-8" src="{{ asset('img/pagos.jpeg') }}" alt="">
-                        <div class="text-gray-700">
-                            <p class="text-sm font-semibold">
-                                Subtotal: {{ $order->total - $order->shipping_cost }} &euro;
-                            </p>
-                            <p class="text-sm font-semibold">
-                                Envío: {{ $order->shipping_cost }} &euro;
-                            </p>
-                            <p class="text-lg font-semibold uppercase">
-                                Pago: {{ $order->total }} &euro;
-                            </p>
-                        </div>
+                    <img class="h-8" src="{{ asset('img/pagos.jpeg') }}" alt="">
+                    <div class="text-gray-700">
+                        <p class="text-sm font-semibold">
+                            Subtotal: {{ $order->total - $order->shipping_cost }} &euro;
+                        </p>
+                        <p class="text-sm font-semibold">
+                            Envío: {{ $order->shipping_cost }} &euro;
+                        </p>
+                        <p class="text-lg font-semibold uppercase">
+                            Pago: {{ $order->total }} &euro;
+                        </p>
+                    </div>
                 </div>
                 <div id="paypal-button-container"></div>
             </div>
         </div>
     </div>
-
+    @push('scripts')
     <script src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=EUR"></script>
     <script>
         paypal.Buttons({
@@ -105,11 +105,13 @@
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(orderData) {
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+         /*           console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                     var transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');*/
+                    Livewire.emit('payOrder');//recibe el evento desde el componente
                 });
             }
         }).render('#paypal-button-container');
     </script>
-</x-app-layout>
+    @endpush
+</div>

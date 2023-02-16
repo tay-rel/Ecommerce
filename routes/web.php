@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
@@ -6,7 +6,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\CreateOrder;
-use App\Http\Livewire\ShoppingCart;
+ use App\Http\Livewire\PaymentOrder;
+ use App\Http\Livewire\ShoppingCart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +33,13 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
-Route::get('orders/{order}/payment', [OrderController::class, 'payment'])->name('orders.payment');
-//Si queremos acceder y no estamos autenticados, automáticamente nos redirigirá a la vista de login.
-Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
+ Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
+
+Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
+
+ Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+
+
 
 

@@ -9,9 +9,18 @@ class OrderController extends Controller
 {
     public function index()
     {
-        //Obtenemos todos los pedidos asociados al usuario autenticado
-        $orders = Order::where('user_id', auth()->user()->id)->get();
-        return view('orders.index', compact('orders'));
+        // procesar el valor de ese parámetro
+        // y poder filtrar el listado de pedidos
+        $orders = Order::query()->where('user_id', auth()->user()->id);
+        if (request('status')) {
+            $orders->where('status', request('status'));
+        }
+        $orders = $orders->get();
+
+        for ($i = 1; $i <= 5; $i++) {
+            $ordersByStatus[$i] = Order::where('user_id', auth()->user()->id)->where('status', $i)->count();
+        }
+        return view('orders.index', compact('orders', 'ordersByStatus'));
     }
 
     public function show(Order $order)

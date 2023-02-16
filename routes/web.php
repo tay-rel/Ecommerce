@@ -33,12 +33,13 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
- Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
+ Route::middleware(['auth'])->group(function (){//autentica las vista a través del mildware
+     Route::get('orders/create', CreateOrder::class)->name('orders.create');
 
-Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
+     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
- Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-
+     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
+ });
 
 
 

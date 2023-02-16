@@ -34,6 +34,9 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
  Route::middleware(['auth'])->group(function (){//autentica las vista a través del mildware
+     //nos lleva a los pedidos
+     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+
      Route::get('orders/create', CreateOrder::class)->name('orders.create');
 
      Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');

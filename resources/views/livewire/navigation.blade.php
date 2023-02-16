@@ -49,6 +49,10 @@ la variable ‘open’ a ‘false’ que controlará que el elemento no sea most
                         {{ __('Profile') }}
                     </x-jet-dropdown-link>
 
+                    <x-jet-dropdown-link href="{{ route('orders.index') }}">
+                        {{ __('My Orders') }}
+                    </x-jet-dropdown-link>
+
                     <div class="border-t border-gray-100"></div>
 
                     <!-- Authentication -->

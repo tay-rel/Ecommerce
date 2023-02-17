@@ -35,8 +35,6 @@ class CreateOrder extends Component
         }
         $this->validate($rules);
 
-        //la clase Order y comenzaremos a darle valor a sus
-        //propiedades (que son las columnas de la tabla orders)
         $order = new Order();
         $order->user_id = auth()->user()->id;
         $order->contact = $this->contact;
@@ -56,6 +54,11 @@ class CreateOrder extends Component
         }
 
         $order->save();//se crea un nuevo registro
+
+        //el encargado de hacer la modificación en la bbdd
+        foreach (Cart::content() as $item) {
+            discount($item);
+        }
 
         Cart::destroy();
         return redirect()->route('orders.payment', $order);

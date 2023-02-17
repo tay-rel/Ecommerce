@@ -22,7 +22,7 @@ class ProductFactory extends Factory
          Pero la marca está en una categoría de debe de tener como una
         de sus subcategorías a la del product*/
         $name = $this->faker->sentence(2);
-        $subcategory =   Subcategory::factory()->create()   ;             // Subcategory::all()->random();
+        $subcategory =   Subcategory::all()->random()  ;             // Subcategory::all()->random();
         $category = $subcategory->category;
         //$brand = $category->brands->random();
         $brand =Brand::factory()->create();

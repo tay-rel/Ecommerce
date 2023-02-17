@@ -35,6 +35,7 @@ class AddCartItemColor extends Component
         $color = $this->product->colors->find($value);
         $this->quantity = qty_available($this->product->id, $color->id);
         $this->options['color'] = $color->name;
+        $this->options['color_id'] = $color->id;//la función helper que definimos lo pueda tener en cuenta y calcular el valor correctamente
     }
     public function addItem()
     {

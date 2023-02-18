@@ -11,6 +11,16 @@ use Livewire\Component;
 
 class CreateProduct extends Component
 {
+    protected $rules = [
+        'category_id' => 'required',
+        'subcategory_id' => 'required',
+        'name' => 'required',
+        'slug' => 'required|unique:products',
+        'description' => 'required',
+        'brand_id' => 'required',
+        'price' => 'required',
+    ];
+
     public $categories,  $subcategories = [], $brands = [];
     public $category_id = '' , $subcategory_id = '', $brand_id = '';
     public $name, $slug,  $description, $price, $quantity;
@@ -36,6 +46,16 @@ class CreateProduct extends Component
     public function getSubcategoryProperty()
     {//busca la subcategory y busca cuyo id coincida
         return Subcategory::find($this->subcategory_id);
+    }
+
+    //toma la propiedad de rules como reglas de validacion
+    public function save()
+    {
+        if ($this->subcategory_id && !$this->subcategory->color && !$this->subcategory->size) {
+            $this->rules['quantity'] = 'required';
+        }//cantidad
+
+        $this->validate();
     }
     public function render()
     {

@@ -16,6 +16,7 @@ class ColorProduct extends Component
     public $color_id, $quantity;
     public $open = false;// Si vale true se mostrará el modal y si es false estará oculto.
     public $pivot, $pivot_color_id, $pivot_quantity;
+    protected $listeners = ['delete'];
     public function mount()
     {
         $this->colors = Color::all();
@@ -37,6 +38,12 @@ class ColorProduct extends Component
         $this->pivot = $pivot;
         $this->pivot_color_id = $pivot->color_id;
         $this->pivot_quantity = $pivot->quantity;
+    }
+
+    public function delete(TbPivot $pivot)
+    {
+        $pivot->delete();
+        $this->product = $this->product->fresh();
     }
 
         public function render()

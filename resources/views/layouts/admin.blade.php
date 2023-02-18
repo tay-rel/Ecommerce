@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <!--Fontaawesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!--Alert Sweealert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @livewireStyles
 

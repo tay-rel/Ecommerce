@@ -26,7 +26,7 @@ class Product extends Model
         return $this->belongsTo(Subcategory::class);
     }
     public function colors(){
-        return $this->belongsToMany(Color::class)->withPivot('quantity');
+        return $this->belongsToMany(Color::class)->withPivot('quantity', 'id');//obtenemos el id de la tabla
     }
     public function images()
     {

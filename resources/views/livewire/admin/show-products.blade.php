@@ -52,7 +52,7 @@
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <span class="inline-flex rounded-full bg-{{ $product->status == 1 ? 'red' : 'green'
-}}-100 px-2 text-xs font-semibold leading-5 text-{{ $product->status == 1 ? 'red' : 'green' }}-800">{{ $product->status == 1 ? 'Borrador' : 'Publicado' }}</span>
+                                        }}-100 px-2 text-xs font-semibold leading-5 text-{{ $product->status == 1 ? 'red' : 'green' }}-800">{{ $product->status == 1 ? 'Borrador' : 'Publicado' }}</span>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $product->price }} &euro;</td>
                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

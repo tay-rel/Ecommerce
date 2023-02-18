@@ -46,15 +46,15 @@
                       wire:model="product.description"
                       x-data
                       x-init="ClassicEditor.create($refs.miEditor)
-.then(function(editor){
-editor.model.document.on('change:data', () => {
-@this.set('description', editor.getData())
-})
-})
-.catch( error => {
-console.error( error );
-} );"
-                      x-ref="miEditor">
+                    .then(function(editor){
+                    editor.model.document.on('change:data', () => {
+                    @this.set('product.description', editor.getData())
+                    })
+                    })
+                    .catch( error => {
+                    console.error( error );
+                    } );"
+                              x-ref="miEditor">
 </textarea>
         </div>
         <x-jet-input-error for="product.description" />
@@ -80,7 +80,7 @@ console.error( error );
             <x-jet-input-error for="product.price" />
         </div>
     </div>
-    @if (!$this->subcategory->color && !$this->subcategory->size)
+    @if ($this->subcategory && !$this->subcategory->color && !$this->subcategory->size)
         <div>
             <x-jet-label value="Cantidad" />
             <x-jet-input

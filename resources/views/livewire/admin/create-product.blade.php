@@ -40,7 +40,6 @@
                      class="w-full bg-gray-200"
                      placeholder="Ingrese el slug del producto" />
     </div>
-
     <!--Descripcion-->
     <div class="mb-4">
         <div wire:ignore>
@@ -60,5 +59,16 @@
                           x-ref="miEditor">
                 </textarea>
         </div>
+    </div>
+
+    <!--inputs marca-->
+    <div class="mb-4">
+        <x-jet-label value="Marca" />
+        <select class="form-control w-full" wire:model="brand_id">
+            <option value="" selected disabled>Seleccione una marca</option>
+            @foreach ($brands as $brand)
+                <option value="{{$brand->id}}">{{$brand->name}}</option>
+            @endforeach
+        </select>
     </div>
 </div>

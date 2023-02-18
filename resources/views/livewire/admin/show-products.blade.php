@@ -1,18 +1,26 @@
 <div>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-600">
-            Lista de productos
-        </h2>
+        <div class="flex items-center">
+            <h2 class="font-semibold text-xl text-gray-600 leading-tight">
+                Lista de productos
+            </h2>
+            <x-button-link class="ml-auto" href="{{route('admin.products.create')}}">
+                Agregar producto
+            </x-button-link>
+        </div>
     </x-slot>
-<!--Buscador-->
-    <div class="px-6 py-4">
-        <x-jet-input class="w-full"
-                     wire:model="search"
-                     type="text"
-                     placeholder="Introduzca el nombre del producto a buscar" />
-    </div>
+
 
     <x-table-responsive>
+        <!--Buscador-->
+
+        <div class="px-6 py-4">
+            <x-jet-input class="w-full"
+                         wire:model="search"
+                         type="text"
+                         placeholder="Introduzca el nombre del producto a buscar" />
+        </div>
+        @if($products->count())
         <table class="min-w-full divide-y divide-gray-300">
                             <thead class="bg-gray-50">
                             <tr>
@@ -55,10 +63,17 @@
                             <!-- More people... -->
                             </tbody>
                         </table>
-                    <!--Paginacion-->
+        @else
+            <div class="px-6 py-4">
+                No existen productos coincidentes
+            </div>
+        @endif
+        <!--Paginacion-->
+        @if($products->hasPages())
                         <div class="px-6 py-4">
                             {{ $products->links() }}
                         </div>
+        @endif
     </x-table-responsive>
 
 </div>

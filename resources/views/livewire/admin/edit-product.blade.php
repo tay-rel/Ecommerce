@@ -1,5 +1,6 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
     <h1 class="text-3xl text-center font-semibold mb-8">Complete los datos para crear un producto</h1>
+    <div class="bg-white shadow-xl rounded-lg p-6">
     <div class="grid grid-cols-2 gap-6 mb-4">
         <div>
             <x-jet-label value="Categorías" />
@@ -30,6 +31,7 @@
                      placeholder="Ingrese el nombre del producto" />
         <x-jet-input-error for="product.name" />
     </div>
+        {{--slug--}}
     <div class="mb-4">
         <x-jet-label value="Slug" />
         <x-jet-input type="text"
@@ -39,6 +41,7 @@
                      placeholder="Ingrese el slug del producto" />
         <x-jet-input-error for="product.slug" />
     </div>
+   {{--Descripcion--}}
     <div class="mb-4">
         <div wire:ignore>
             <x-jet-label value="Descripción" />
@@ -92,7 +95,10 @@
     @endif
 
     {{--Boton --}}
-    <div class="flex mt-4">
+    <div class="flex  justify-end items-center mt-4">
+        <x-jet-action-message class="mr-3" on="saved">
+            Actualizado
+        </x-jet-action-message>
         <x-jet-button
             wire:loading.attr="disabled"
             wire:target="save"
@@ -101,4 +107,12 @@
             Actualizar producto
         </x-jet-button>
     </div>
+    </div>
+    @if($this->subcategory)
+        @if($this->subcategory->size)
+            @livewire('admin.size-product', ['product' => $product], key('size-product-' . $product->id))
+        @elseif($this->subcategory->color)
+            @livewire('admin.color-product', ['product' => $product], key('color-product-' . $product->id))
+        @endif
+    @endif
 </div>

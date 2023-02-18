@@ -13,6 +13,7 @@ class ColorProduct extends Component
     ];
     public $product, $colors;
     public $color_id, $quantity;
+    public $open = false;// Si vale true se mostrará el modal y si es false estará oculto.
     public function mount()
     {
         $this->colors = Color::all();

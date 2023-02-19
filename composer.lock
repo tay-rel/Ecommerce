@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5ab64a2f484cd4e8a52ac3423a76b4a",
+    "content-hash": "e2413461cc10b87b2ec3a3ea487662b1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6701,16 +6701,16 @@
         },
         {
             "name": "mmo/faker-images",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/morawskim/faker-images.git",
-                "reference": "fff9965ce5e9587301311de856f126a11ce1dc24"
+                "reference": "fbd14a2ae74a5244b98ceb9bde2d70a49dd1a218"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/morawskim/faker-images/zipball/fff9965ce5e9587301311de856f126a11ce1dc24",
-                "reference": "fff9965ce5e9587301311de856f126a11ce1dc24",
+                "url": "https://api.github.com/repos/morawskim/faker-images/zipball/fbd14a2ae74a5244b98ceb9bde2d70a49dd1a218",
+                "reference": "fbd14a2ae74a5244b98ceb9bde2d70a49dd1a218",
                 "shasum": ""
             },
             "require": {
@@ -6723,7 +6723,8 @@
                 "squizlabs/php_codesniffer": "^3.6"
             },
             "suggest": {
-                "ext-curl": "*"
+                "ext-curl": "*",
+                "ext-gd": "*"
             },
             "type": "library",
             "autoload": {
@@ -6750,9 +6751,9 @@
             ],
             "support": {
                 "issues": "https://github.com/morawskim/faker-images/issues",
-                "source": "https://github.com/morawskim/faker-images/tree/v0.7.0"
+                "source": "https://github.com/morawskim/faker-images/tree/v0.8.0"
             },
-            "time": "2022-11-12T10:23:37+00:00"
+            "time": "2023-02-01T17:23:05+00:00"
         },
         {
             "name": "mockery/mockery",

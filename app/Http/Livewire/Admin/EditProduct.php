@@ -4,9 +4,11 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -64,6 +66,12 @@ class EditProduct extends Component
         $this->validate();
         $this->product->save();
         $this->emit('saved');
+    }
+    public function deleteImage(Image $image)
+    {
+        Storage::disk('public')->delete([$image->url]);
+        $image->delete();
+        $this->product = $this->product->fresh();
     }
     public function render()
     {

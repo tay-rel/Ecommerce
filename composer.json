@@ -21,7 +21,7 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/dusk": "^6.25",
         "laravel/sail": "^1.0.1",
-        "mmo/faker-images": "^0.8.0",
+        "mmo/faker-images": "^0.7.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"

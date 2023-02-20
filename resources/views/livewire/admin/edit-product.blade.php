@@ -132,7 +132,15 @@
                 dictDefaultMessage: "Mueva una imagen al recuadro",
                 acceptedFiles: 'image/*',//solo recibe imagenes en cualquier formato
                 paramName: "file", // The name that will be used to transfer the file
-                maxFilesize: 2 // El maximo tamaño
+                maxFilesize: 2, // El maximo tamaño
+                //Borra el recuadro de la imagen
+                complete: function(file) {
+                    this.removeFile(file);
+                },
+                //Las imagenes que se hayan subido se hayan cargado
+                queuecomplete: function() {
+                    Livewire.emit('refreshProduct');
+                }
             };
         </script>
     @endpush

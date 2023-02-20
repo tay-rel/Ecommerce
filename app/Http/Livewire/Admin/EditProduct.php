@@ -27,6 +27,7 @@ class EditProduct extends Component
 
     public $product ,$categories, $subcategories, $brands;
     public $category_id;
+    protected $listeners = ['refreshProduct'];
     public function mount(Product $product)
     {
         $this->product = $product;
@@ -71,6 +72,10 @@ class EditProduct extends Component
     {
         Storage::disk('public')->delete([$image->url]);
         $image->delete();
+        $this->product = $this->product->fresh();
+    }
+    public function refreshProduct()
+    {
         $this->product = $this->product->fresh();
     }
     public function render()

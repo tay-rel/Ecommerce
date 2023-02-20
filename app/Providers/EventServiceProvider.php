@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Listeners\MergeTheCart;
 use App\Listeners\MergeTheCartLogout;
+use App\Models\Product;
+use App\Observers\ProductObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Login;//obtien el carrito autenticado
 use Illuminate\Auth\Events\Logout;//almacena
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    /*No tiene sentido guardar los posibles colores del producto
+    si ese producto está en una categoría que no necesita
+    elegir color.*/
     /**
      * Register any events for your application.
      *
@@ -39,6 +44,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //observers de Laravel
+
+        Product::observe(ProductObserver::class);
     }
 }

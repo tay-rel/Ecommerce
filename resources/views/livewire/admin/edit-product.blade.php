@@ -6,6 +6,27 @@
               class="dropzone"
               id="my-awesome-dropzone"></form>
     </div>
+    {{--imagen--}}
+    @if ($product->images->count())
+        <section class="bg-white shadow-xl rounded-lg p-6 mb-4">
+            <h1 class="text-2xl text-center font-semibold mb-2">Imagenes del producto</h1>
+            <ul class="flex flex-wrap">
+                @foreach ($product->images as $image)
+                    <li class="relative" wire:key="image-{{ $image->id }}">
+                        <img class="w-32 h-20 object-cover" src="{{ Storage::url($image->url) }}" alt="">
+                        <x-jet-danger-button class="absolute right-2 top-2 w-6 h-4"
+                                             wire:click="deleteImage({{ $image->id }})" wire:loading.attr="disabled"
+                                             wire:target="deleteImage({{ $image->id }})">
+                            x
+                        </x-jet-danger-button>
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+    @endif
+    {{--Status--}}
+    @livewire('admin.status-product', ['product' => $product], key('status-product-' . $product->id))
+
     <div class="bg-white shadow-xl rounded-lg p-6">
     <div class="grid grid-cols-2 gap-6 mb-4">
         <div>
@@ -121,25 +142,6 @@
             @livewire('admin.color-product', ['product' => $product], key('color-product-' . $product->id))
         @endif
     @endif
-    {{--eliminar imagen--}}
-    @if ($product->images->count())
-        <section class="bg-white shadow-xl rounded-lg p-6 mb-4">
-            <h1 class="text-2xl text-center font-semibold mb-2">Imagenes del producto</h1>
-            <ul class="flex flex-wrap">
-                @foreach ($product->images as $image)
-                    <li class="relative" wire:key="image-{{ $image->id }}">
-                        <img class="w-32 h-20 object-cover" src="{{ Storage::url($image->url) }}" alt="">
-                        <x-jet-danger-button class="absolute right-2 top-2 w-6 h-4"
-                                             wire:click="deleteImage({{ $image->id }})" wire:loading.attr="disabled"
-                                             wire:target="deleteImage({{ $image->id }})">
-                            x
-                        </x-jet-danger-button>
-                    </li>
-                @endforeach
-            </ul>
-        </section>
-    @endif
-
     {{--Recibe el token csrf--}}
     @push('scripts')
         <script>

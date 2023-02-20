@@ -1,3 +1,5 @@
 <x-admin-layout>
-    estoy en index
+    <div class="container-menu py-12">
+        @livewire('admin.create-category')
+    </div>
 </x-admin-layout>

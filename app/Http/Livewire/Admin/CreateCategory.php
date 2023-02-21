@@ -32,6 +32,11 @@ class CreateCategory extends Component
         'createForm.icon' => 'icono',
         'createForm.image' => 'imagen',
         'createForm.brands' => 'marcas',
+        'editForm.name' => 'nombre',
+        'editForm.slug' => 'slug',
+        'editForm.icon' => 'ícono',
+        'editImage' => 'imagen',
+        'editForm.brands' => 'marcas'
     ];
     public $category;
     public $editImage;
@@ -91,6 +96,22 @@ class CreateCategory extends Component
         $this->editForm['icon'] = $category->icon;
         $this->editForm['image'] = $category->image;
         $this->editForm['brands'] = $category->brands->pluck('id');//trae uno de los campos ,es una coleccion
+    }
+    public function update(){
+        $rules = [
+            'editForm.name' => 'required',
+            'editForm.slug' => 'required|unique:categories,slug,' . $this->category->id,
+            'editForm.icon' => 'required',
+            'editForm.brands' => 'required',
+        ];
+        if ($this->editImage) {
+            $rules['editImage'] = 'required|image|max:1024';
+        }
+        $this->validate($rules);
+    }
+    public function updatedEditFormName($value)
+    {
+        $this->editForm['slug'] = Str::slug($value);
     }
     public function getCategories()
     {

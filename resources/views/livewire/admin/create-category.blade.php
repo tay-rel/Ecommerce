@@ -166,7 +166,7 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-danger-button wire:loading.attr="disabled" wire:target="editImage">
+            <x-jet-danger-button wire:click="update" wire:loading.attr="disabled" wire:target="editImage">
                 Actualizar
             </x-jet-danger-button>
         </x-slot>

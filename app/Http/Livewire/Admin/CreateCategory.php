@@ -4,13 +4,14 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Brand;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 class CreateCategory extends Component
 {
     use WithFileUploads;
-    public $brands, $categories, $image;//image limpia el input de subida de imagen
+    public $brands, $categories, $image, $image2;//image limpia el input de subida de imagen
     public $createForm = [
         'name' => null,
         'slug' => null,
@@ -85,8 +86,9 @@ class CreateCategory extends Component
     }
     public function edit(Category $category)
     {
-        $this->image = rand();
+        $this->image2 = rand();
         $this->reset(['editImage']);
+        $this->resetValidation();
 
         $this->category = $category;
 
@@ -108,6 +110,15 @@ class CreateCategory extends Component
             $rules['editImage'] = 'required|image|max:1024';
         }
         $this->validate($rules);
+
+        if ($this->editImage) {
+            Storage::disk('public')->delete($this->editForm['image']);
+            $this->editForm['image'] = $this->editImage->store('categories', 'public');
+        }
+        $this->category->update($this->editForm);
+        $this->category->brands()->sync($this->editForm['brands']);
+        $this->reset(['editForm', 'editImage']);
+        $this->getCategories();
     }
     public function updatedEditFormName($value)
     {

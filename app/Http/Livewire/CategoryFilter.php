@@ -15,10 +15,20 @@ class CategoryFilter extends Component
     //por defecto es list
     public $view = 'grid';
     public $category , $subcategoria, $marca;
+    public $queryString = ['subcategoria', 'marca'];
 
     public function limpiar()
     {
-        $this->reset(['subcategoria', 'marca']);
+        $this->reset(['subcategoria', 'marca', 'page']);
+    }
+
+    public function updatedSubcategoria()
+    {
+        $this->resetPage();
+    }
+    public function updatedMarca()
+    {
+        $this->resetPage();
     }
 
     public function render()
@@ -31,7 +41,7 @@ class CategoryFilter extends Component
         //Si se tiene seleccionado algo, osea el filtro se agrega solo sii esque tenemos algo almacenado
         if ($this->subcategoria) {
             $productsQuery = $productsQuery->whereHas('subcategory', function(Builder $query){
-                $query->where('name', $this->subcategoria);
+                $query->where('slug', $this->subcategoria);
             });
         }
         if ($this->marca) {

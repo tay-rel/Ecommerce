@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 class CreateCategory extends Component
 {
     use WithFileUploads;
-    public $brands, $image;//image limpia el input de subida de imagen
+    public $brands, $categories, $image;//image limpia el input de subida de imagen
     public $createForm = [
         'name' => null,
         'slug' => null,
@@ -36,6 +36,7 @@ class CreateCategory extends Component
     public function mount()
     {
         $this->getBrands();
+        $this->getCategories();
         $this->image = 1;
     }
     public function getBrands()
@@ -57,10 +58,17 @@ class CreateCategory extends Component
 
         $this->image = 2;
         $this->reset('createForm');
+
+        $this->getCategories();//aparece en el listado
+        $this->emit('saved');
     }
     public function updatedCreateFormName($value)
     {
         $this->createForm['slug'] = Str::slug($value);
+    }
+    public function getCategories()
+    {
+        $this->categories = Category::all();
     }
     public function render()
     {

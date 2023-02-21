@@ -25,6 +25,7 @@ class CreateCategory extends Component
         'createForm.image' => 'required|image|max:1024',
         'createForm.brands' => 'required',
     ];
+
     protected $validationAttributes = [
         'createForm.name' => 'nombre',
         'createForm.slug' => 'slug',
@@ -32,7 +33,7 @@ class CreateCategory extends Component
         'createForm.image' => 'imagen',
         'createForm.brands' => 'marcas',
     ];
-
+    public $listeners = ['delete'];
     public function mount()
     {
         $this->getBrands();
@@ -69,6 +70,11 @@ class CreateCategory extends Component
     public function getCategories()
     {
         $this->categories = Category::all();
+    }
+    public function delete(Category $category)
+    {
+        $category->delete();
+        $this->getCategories();
     }
     public function render()
     {

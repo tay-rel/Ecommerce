@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
@@ -17,8 +18,10 @@ class UserSeeder extends Seeder
     {
         $role = Role::create(['name' => 'admin']);
         User::factory()->create([
-            'name' => 'Ariel Mayta',
-            'email' => 'ariel@gmail.com',
+            'name' => 'Tay',
+            'email' => 'tayrel@gmail.com',
+            'password'=> Hash::make('12345678')
+
         ])->assignRole('admin');
 
         User::factory(100)->create();

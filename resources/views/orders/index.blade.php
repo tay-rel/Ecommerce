@@ -47,6 +47,7 @@
             </a>
         </section>
 
+        @if($orders->count())
         <section class="bg-white shadow-lg rounded-lg px-12 py-8 mt-12 text-gray-700">
             <h1 class="text-2xl mb-4">Pedidos recientes</h1>
             <ul>
@@ -112,5 +113,12 @@
                 @endforeach
             </ul>
         </section>
+        @else
+            <div class="bg-white shadow-lg rounded-lg px-12 py-8 mt-12 text-gray-700">
+                    <span class="font-bold text-lg">
+                    No existen registros de pedidos
+                    </span>
+            </div>
+        @endif
     </div>
 </x-app-layout>

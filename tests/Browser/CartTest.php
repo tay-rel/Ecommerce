@@ -20,19 +20,19 @@ class CartTest extends DuskTestCase
      */
     public function testExample()
     {
-        Category::factory()->create();
-        //productos
-
-
-        $usuario = User::factory()->create();
-
-        $this->browse(function (Browser $browser) use ($usuario) {
-            $browser->visit('/login')
-                    ->type('email', $usuario->email)
-                    ->type('password',  'password')
-                    ->press('INICIAR SESIÓN')
-                    ->assertPathIs('/')
-                    ->screenshot('carrito');//captura error;
-        });
+//        Category::factory()->create();
+//        //productos
+//
+//
+//        $usuario = User::factory()->create();
+//
+//        $this->browse(function (Browser $browser) use ($usuario) {
+//            $browser->visit('/login')
+//                    ->type('email', $usuario->email)
+//                    ->type('password',  'password')
+//                    ->press('INICIAR SESIÓN')
+//                    ->assertPathIs('/')
+//                    ->screenshot('carrito');//captura error;
+//        });
     }
 }

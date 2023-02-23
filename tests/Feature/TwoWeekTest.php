@@ -183,4 +183,9 @@ class TwoWeekTest extends TestCase
             ->assertSee('Menu');
     }
 
+    /************5***********/
+    public function test_check_vist_detail_filter_subcategory_or_brand()
+    {
+
+    }
 }

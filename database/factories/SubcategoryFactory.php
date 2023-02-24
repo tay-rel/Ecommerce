@@ -22,4 +22,18 @@ class SubcategoryFactory extends Factory
 
         ];
     }
+
+
+//$category = Category::all()->random();
+//$color = collect([true, false])->random();
+//$size = collect([true, false])->random();
+//return [
+//    //'image' => 'subcategories/' . $this->faker->picsum(storage_path('app/public/subcategories'), 640, 480, null, false),
+//'category_id' => $category->id,
+//'name'=>  $this->faker->sentence(),
+//'slug'=>  $this->faker->sentence(),
+////            'color' => $color,
+////            'size' => $color ? $size : false,
+//    // 'category_id' => Category::factory(),
+
 }

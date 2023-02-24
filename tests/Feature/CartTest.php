@@ -23,8 +23,8 @@ class CartTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_example()
-    {
+//    public function test_example()
+//    {
 //        // GIVEN Un carrito con productos
 //        $product1 = Product::factory()->create();
 //        $product2 = Product::factory()->create();
@@ -55,7 +55,7 @@ class CartTest extends TestCase
 //        $response = $this->get('/');
 //
 //        $response->assertStatus(200);
-    }
+//    }
     public function test_add_cart_and_save_logout()
     {
         //logueo
@@ -65,7 +65,7 @@ class CartTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+        $this->assertAuthenticated();//  $this->actingAs($user);
 
         //Crea un producto
         $category = Category::factory()->create([
@@ -82,6 +82,7 @@ class CartTest extends TestCase
 
         $product =  Product::factory()->create([
             'name'=>Str::random(5),
+            'subcategory_id'=>$subcategory1->id
         ]);
 
         //solo es un producto creado
@@ -106,7 +107,9 @@ class CartTest extends TestCase
        $this->actingAs($user);//metodo de phpunit, que recoge un usuario y lo loguea
 
         Livewire::test(ShoppingCart::class)
-        ->assertSee($product->name);
+            ->assertSee($product->name)
+            ->assertSee($product->price)
+            ->assertStatus(200);
 
 
         /*Antes de añadir y hacer logout no hay nada en el carro y cuando se hace logout e guarda el registro.

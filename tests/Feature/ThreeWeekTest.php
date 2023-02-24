@@ -418,8 +418,5 @@ class ThreeWeekTest extends TestCase
             ->set('city_id', $ciudad1->id)
             ->assertSee($distrito1->name)
             ->assertDontSee($distrito2->name);
-
-
-
     }
 }

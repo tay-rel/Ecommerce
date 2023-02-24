@@ -56,6 +56,8 @@ class CartTest extends TestCase
 //
 //        $response->assertStatus(200);
 //    }
+
+    /******11-semana tres******/
     public function test_add_cart_and_save_logout()
     {
         //logueo

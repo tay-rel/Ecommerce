@@ -9,7 +9,6 @@ class ShoppingCart extends Component
 {
     public $listeners = ['render'];
 
-
     public function destroy()
     {
         Cart::destroy();

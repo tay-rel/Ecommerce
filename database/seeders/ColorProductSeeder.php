@@ -19,6 +19,8 @@ class ColorProductSeeder extends Seeder
             $query->where('color', true)
                 ->where('size', false);
         })->get();
+        //la relacion de color_id y product_id
+        //colors: cantidad, id
         foreach ($products as $product) {
             $product->colors()->attach([
                 1 => [

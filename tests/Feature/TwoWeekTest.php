@@ -2,12 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\Http\Livewire\AddCartItem;
+use App\Http\Livewire\AddCartItemColor;
+use App\Http\Livewire\AddCartItemSize;
+use App\Http\Livewire\CategoryFilter;
 use App\Http\Livewire\CategoryProducts;
 use App\Http\Livewire\Navigation;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\Subcategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -157,10 +163,13 @@ class TwoWeekTest extends TestCase
     }
 
     /************4***********/
-    public function test_check_can_see_details()
+    public function test_check_can_see_details_category()
     {
         $category = Category::factory()->create([
             'name'=>'Celulares y tablets'
+        ]);
+        $category2 = Category::factory()->create([
+            'name'=>'Moda'
         ]);
 
         $subcategory1 =  Subcategory::factory()->create([
@@ -168,8 +177,16 @@ class TwoWeekTest extends TestCase
             'name'=> 'Smartwatches'
         ]);
 
+        $subcategory2 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Accesorios para celulares'
+        ]);
+
         $marca = Brand::factory()->create();
         $marca->categories()->attach($category->id);
+
+        $marca2 = Brand::factory()->create();
+        $marca2->categories()->attach($category->id);
 
         $product =  Product::factory()->create([
             'subcategory_id' => $subcategory1->id,
@@ -182,9 +199,9 @@ class TwoWeekTest extends TestCase
                 'imageable_type' => Product::class
             ]);
         $product2 =  Product::factory()->create([
-            'subcategory_id' => $subcategory1->id,
+            'subcategory_id' => $subcategory2->id,
             'name'=>Str::random(5),
-            'brand_id' => $marca->id,
+            'brand_id' => $marca2->id,
             'price'=>18.99
         ]);
         Image::factory()->create([
@@ -192,45 +209,41 @@ class TwoWeekTest extends TestCase
             'imageable_type' => Product::class
         ]);
 
-        $response =$this->get('products/' . $product->slug)
-            ->assertSee('Celulares y tablets')
-            ->assertSee('Smartwatches')
-            ->assertSee($product->name)
-            ->assertSee($product->price)
-            ->assertSeeText('Descripción')
-            ->assertDontSee($product2->name)
-            ->assertDontSee($product2->price);
+        Livewire::test(CategoryFilter::class, ['category'=>$category])
+                   ->assertSee($category->name)
+                   ->assertSee($subcategory1->name)
+                   ->assertSee($subcategory2->name)
+                   ->assertSee($marca->name)
+                   ->assertSee($marca2->name)
+                   ->assertSee($product->name)
+                   ->assertSee($product2->name)
+                   ->assertDontSee($category2->name);
     }
 
     /************5***********/
-    public function test_check_vist_detail_filter_subcategory_or_brand()
+    public function test_check_vist_detail_filter_subcategory()
     {
         $category = Category::factory()->create([
             'name'=>'Celulares y tablets'
         ]);
 
-        $category2 = Category::factory()->create([
-            'name'=>'TV, audio y video'
-        ]);
-
-        $subcategory =  Subcategory::factory()->create([
+        $subcategory1 =  Subcategory::factory()->create([
             'category_id'=>$category->id,
             'name'=> 'Smartwatches'
         ]);
         $subcategory2 =  Subcategory::factory()->create([
-            'category_id'=>$category2->id,
-            'name'=> 'Audios'
+            'category_id'=>$category->id,
+            'name'=> 'Accesorios para celulares'
         ]);
 
-//        dd($subcategory2);
         $marca = Brand::factory()->create();
         $marca->categories()->attach($category->id);
 
         $marca2 = Brand::factory()->create();
-        $marca2->categories()->attach($category2->id);
+        $marca2->categories()->attach($category->id);
 
         $product =  Product::factory()->create([
-            'subcategory_id' => $subcategory->id,
+            'subcategory_id' => $subcategory1->id,
             'name'=>Str::random(5),
             'brand_id' => $marca->id,
             'price'=>19.99
@@ -240,23 +253,294 @@ class TwoWeekTest extends TestCase
             'imageable_type' => Product::class
         ]);
         $product2 =  Product::factory()->create([
-            'subcategory_id' => $subcategory->id,
+            'subcategory_id' => $subcategory2->id,
             'name'=>Str::random(5),
-            'brand_id' => $marca->id,
+            'brand_id' => $marca2->id,
             'price'=>18.99
         ]);
         Image::factory()->create([
             'imageable_id' => $product2->id,
             'imageable_type' => Product::class
         ]);
-        //categoriescategories/celulares-y-tablets?subcategoria=smartwatches
 
-        $response =$this->get('categories/' . $category->slug)
-            ->assertSee('Celulares y tablets')
-            ->assertSee($subcategory->name)
-            ->assertSee($marca->name);
-//            ->assertDontSee($subcategory2->name)
-//            ->assertDontSee($marca2->name);
+        Livewire::test(CategoryFilter::class, ['category' =>$category])//llega al componente con la variable,a la vista le llega la vaiable
+        ->set('subcategoria' , $subcategory1->slug)
+        ->assertSee($category->name)
+        ->assertSee($product->name)
+        ->assertDontSee($product2->name);
+
+    }
+    public function test_check_vist_detail_filter_brand()
+    {
+
+        $category = Category::factory()->create([
+            'name'=>'Celulares y tablets'
+        ]);
+
+        $subcategory1 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Smartwatches'
+        ]);
+        $subcategory2 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Accesorios para celulares'
+        ]);
+
+        $marca = Brand::factory()->create();
+        $marca->categories()->attach($category->id);
+
+        $marca2 = Brand::factory()->create();
+        $marca2->categories()->attach($category->id);
+
+        $product =  Product::factory()->create([
+            'subcategory_id' => $subcategory1->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca->id,
+            'price'=>19.99
+        ]);
+        Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class
+        ]);
+        $product2 =  Product::factory()->create([
+            'subcategory_id' => $subcategory2->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca2->id,
+            'price'=>18.99
+        ]);
+        Image::factory()->create([
+            'imageable_id' => $product2->id,
+            'imageable_type' => Product::class
+        ]);
+
+        //la marca depende de la subcategoria
+        Livewire::test(CategoryFilter::class, ['category' =>$category])
+            ->set('subcategoria' , $subcategory1->slug)
+            ->set('marca' , $marca->name)
+            ->assertSee($category->name)
+            ->assertSee($product->name)
+            ->assertSee($marca->name)
+            ->assertDontSee($product2->name);
+
+    }
+    /************6***********/
+    public function test_check_can_see_details_product()
+    {
+        $category = Category::factory()->create([
+            'name'=>'Celulares y tablets'
+        ]);
+
+        $subcategory1 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Smartwatches'
+        ]);
+
+        $subcategory2 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Accesorios para celulares'
+        ]);
+
+        $marca = Brand::factory()->create();
+        $marca->categories()->attach($category->id);
+
+        $marca2 = Brand::factory()->create();
+        $marca2->categories()->attach($category->id);
+
+        $product =  Product::factory()->create([
+            'subcategory_id' => $subcategory1->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca->id,
+            'price'=>19.99
+        ]);
+        Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class
+        ]);
+        $product2 =  Product::factory()->create([
+            'subcategory_id' => $subcategory2->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca2->id,
+            'price'=>18.99
+        ]);
+        Image::factory()->create([
+            'imageable_id' => $product2->id,
+            'imageable_type' => Product::class
+        ]);
+
+        $this->get('products/' .  $product->slug)
+            ->assertSee($product->name)
+                ->assertSee($marca->name)
+             ->assertSee($product->price)
+            ->assertSeeText('Descripción')
+        ->assertDontSee($product2->name);
     }
 
+    /************7***********/
+    public function test_details_product_whitout_color_image_description_name_price_stock_button_and_add_shopping_cart()
+    {
+        $category = Category::factory()->create([
+            'name'=>'Celulares y tablets'
+        ]);
+
+        $subcategory1 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Smartwatches'
+        ]);
+
+        $subcategory2 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Accesorios para celulares'
+        ]);
+
+        $marca = Brand::factory()->create();
+        $marca->categories()->attach($category->id);
+
+        $marca2 = Brand::factory()->create();
+        $marca2->categories()->attach($category->id);
+
+        $product =  Product::factory()->create([
+            'subcategory_id' => $subcategory1->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca->id,
+            'price'=>19.99
+        ]);
+       $imagen1= Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class
+        ]);
+        $product2 =  Product::factory()->create([
+            'subcategory_id' => $subcategory2->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca2->id,
+            'price'=>18.99
+        ]);
+       $imagen2 = Image::factory()->create([
+            'imageable_id' => $product2->id,
+            'imageable_type' => Product::class
+        ]);
+
+       //creo carrito
+      Livewire::test(AddCartItem::class,['product'=>$product])
+      ->call('addItem');//añade carrito
+
+
+        $this->get('products/' . $product->slug)
+            ->assertSee($product->name)
+            ->assertSee($marca->name)
+            ->assertSee($imagen1->url)
+            ->assertSee($product->description)
+            ->assertSeeText('Descripción')
+            ->assertSee($product->price)
+            ->assertSee($product->quantity)
+            ->assertSeeText('+')
+            ->assertSeeText('-')
+            ->assertSeeText('Agregar al carrito de compras')
+            ->assertDontSee($product2);
+    }
+
+    /************8***********/
+    public function test_check_select_color()
+    {
+        $category = Category::factory()->create([
+            'name'=>'Celulares y tablets'
+        ]);
+
+        $subcategory1 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Smartwatches'
+        ]);
+
+        $subcategory2 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Accesorios para celulares'
+        ]);
+
+        $marca = Brand::factory()->create();
+        $marca->categories()->attach($category->id);
+
+        $marca2 = Brand::factory()->create();
+        $marca2->categories()->attach($category->id);
+        $color = Color::factory()->create([
+            'name'=>'Azul',
+        ]);
+
+        $product =  Product::factory()->create([
+            'subcategory_id' => $subcategory1->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca->id,
+            'price'=>19.99
+        ]);
+
+        $product->colors()->attach([//la relacion llama a la tabla pivote
+            $color->id=>['quantity'=>5]
+        ]);
+
+        $imagen1= Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class
+        ]);
+        $product2 =  Product::factory()->create([
+            'subcategory_id' => $subcategory2->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca2->id,
+            'price'=>18.99
+        ]);
+        $imagen2 = Image::factory()->create([
+            'imageable_id' => $product2->id,
+            'imageable_type' => Product::class
+        ]);
+
+        Livewire::test(AddCartItemColor::class,['product'=>$product] )
+        ->assertSee($color->name);
+    }
+
+    public function test_check_select_color_and_size()
+    {
+        $category = Category::factory()->create([
+            'name'=>'Celulares y tablets'
+        ]);
+
+        $subcategory1 =  Subcategory::factory()->create([
+            'category_id'=>$category->id,
+            'name'=> 'Smartwatches'
+        ]);
+
+
+        $marca = Brand::factory()->create();
+        $marca->categories()->attach($category->id);
+
+        $color = Color::create([
+            'name'=>'Azul',
+        ]);
+
+        $product =  Product::factory()->create([
+            'subcategory_id' => $subcategory1->id,
+            'name'=>Str::random(5),
+            'brand_id' => $marca->id,
+            'price'=>19.99
+        ]);
+
+        $product->sizes()->create([
+            'name'=>'Talla S'
+        ]);
+
+        //crea talla, que esta relacionado con el producto
+        $talla = Size::first();
+
+        //relacion color, porque el color esta relacionado con la talla
+        $talla->colors()->attach([
+            $color->id =>['quantity'=>5],
+        ]);
+
+        $imagen1= Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class
+        ]);
+
+
+        Livewire::test(AddCartItemSize::class, ['product'=>$product])
+            ->set('size_id',$product->sizes[0]->id)//producto llama a la relacion con talla y su id
+            ->assertSee($talla->name)
+            ->assertSee($color->name);
+    }
 }

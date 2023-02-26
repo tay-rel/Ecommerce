@@ -1,5 +1,10 @@
 <x-admin-layout>
 
-Estoy en la vista de productos 2
+<div class="container-menu">
+
+    @livewire('admin.show-products2')
+
+</div>
+
 
 </x-admin-layout>

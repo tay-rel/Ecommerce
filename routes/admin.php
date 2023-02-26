@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\Products2Controller;
 use App\Http\Livewire\Admin\BrandComponent;
 use App\Http\Livewire\Admin\CreateProduct;
 use App\Http\Livewire\Admin\DepartmentComponent;
@@ -40,3 +41,4 @@ Route::get('cities/{city}', ShowCity::class)->name('admin.cities.show');
 
 Route::get('users', UserComponent::class)->name('admin.users.index');
 
+Route::get('productos2', [Products2Controller::class, 'index'])->name('admin.products.index');

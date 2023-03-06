@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center">
             <h2 class="font-semibold text-xl text-gray-600 leading-tight">
-                Lista de productos
+                Lista de productos 2
             </h2>
             <x-button-link class="ml-auto" href="{{route('admin.products.create')}}">
                 Agregar producto
@@ -22,6 +22,18 @@
         </div>
         @if($products->count())
             <table class="min-w-full divide-y divide-gray-300">
+                {{--Seleccionar paginacion--}}
+                <div class="flex justify-star">
+                    <div class="mb-3 xl:w-96">
+                        <select class="form-control" wire:model="selectPage">
+                            <option value="" selected disabled>Seleccione paginación</option>
+                            @foreach ($pages as $page)
+                                <option value="{{ $page }}">{{ $page }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <thead class="bg-gray-50">
                 <tr>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nombre</th>

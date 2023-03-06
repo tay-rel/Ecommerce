@@ -16,6 +16,18 @@ class ShowProducts2 extends Component
     public $pages = [5,10,15,25,50,100];
     public $selectPage=5;
 
+    public $columns = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Ventas', 'Stock', 'Fecha'];
+    public $selectedColumn = [];
+
+    public function mount()
+    {
+        $this->selectedColumn = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Ventas', 'Stock', 'Fecha'];
+    }
+
+    public function showColumns($column)
+    {
+        return in_array($column, $this->selectedColumn);
+    }
     public function updatingSearch()
     {
         $this->resetPage();

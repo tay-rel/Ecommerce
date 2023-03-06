@@ -34,17 +34,55 @@
                     </div>
                 </div>
 
+                {{--Visibilidad de columnas--}}
+
+                <div class="flex justify-star">
+                    <div class="mb-3 xl:w-96">
+                        @foreach ($columns as $column)
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" wire:model="selectedColumn"
+                                       value="{{ $column }}">
+                                <span class="ml-1">{{ $column }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
                 <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nombre</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Categoría</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio</th>
+                    @if($this->showColumns('Nombre'))
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nombre
+                    @endif
+                    </th>
+                    @if($this->showColumns('Categoria'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Categoría
+                    @endif
+                    </th>
+                    @if($this->showColumns('Estado'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado
+                    @endif
+                    </th>
+                    @if($this->showColumns('Precio'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio
+                    @endif
+                    </th>
 
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Marca</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nº Ventas</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Stock disponible</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha de creación</th>
+                    @if($this->showColumns('Marca'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Marca
+                    @endif
+                    </th>
+                    @if($this->showColumns('Ventas'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nº Ventas
+                    @endif
+                    </th>
+                    @if($this->showColumns('Stock'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Stock disponible
+                    @endif
+                    </th>
+                    @if($this->showColumns('Fecha'))
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha de creación
+                    @endif
+                    </th>
 
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Editar</span>
@@ -56,29 +94,51 @@
                     <tr>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                             <div class="flex items-center">
+                                @if($this->showColumns('Imagen'))
                                 <div class="h-10 w-10 flex-shrink-0 object-cover">
                                     <img class="h-10 w-10 rounded-full" src="{{  $product->images->count() ? Storage::url($product->images->first()->url) :
 'img/default.jpg' }}" alt="">
                                 </div>
+                                @endif
+                                @if($this->showColumns('Nombre'))
                                 <div class="ml-4">
                                     <div class="font-medium text-gray-900">{{ $product->name }}</div>
                                 </div>
+                                    @endif
                             </div>
                         </td>
+                        @if($this->showColumns('Categoria'))
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             <div class="text-gray-900">{{ $product->subcategory->category->name }}</div>
                             <div class="text-gray-500">{{ $product->subcategory->name }}</div>
+                            @endif
                         </td>
+                            @if($this->showColumns('Estado'))
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <span class="inline-flex rounded-full bg-{{ $product->status == 1 ? 'red' : 'green'
                                         }}-100 px-2 text-xs font-semibold leading-5 text-{{ $product->status == 1 ? 'red' : 'green' }}-800">{{ $product->status == 1 ? 'Borrador' : 'Publicado' }}</span>
+                            @endif
                         </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $product->price }} &euro;</td>
-
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $product->brand->name }} </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->sales }} </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->stock }} </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at }} </td>
+                                @if($this->showColumns('Precio'))
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $product->price }} &euro;
+                            @endif
+                        </td>
+                                    @if($this->showColumns('Marca'))
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $product->brand->name }}
+                            @endif
+                        </td>
+                                        @if($this->showColumns('Ventas'))
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->sales }}
+                            @endif
+                        </td>
+                                            @if($this->showColumns('Stock'))
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->stock }}
+                            @endif
+                        </td>
+                                                @if($this->showColumns('Fecha'))
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at }}
+                            @endif
+                        </td>
 
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                             <a href="{{ route('admin.products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900">Editar</a>

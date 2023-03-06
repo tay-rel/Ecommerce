@@ -11,11 +11,14 @@ use App\Http\Livewire\Admin\ShowCategory;
 use App\Http\Livewire\Admin\ShowCity;
 use App\Http\Livewire\Admin\ShowDepartment;
 use App\Http\Livewire\Admin\ShowProducts;
+use App\Http\Livewire\Admin\ShowProducts2;
 use App\Http\Livewire\Admin\UserComponent;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', ShowProducts::class)->name('admin.index');
+//Producto 2
+Route::get('/products2', ShowProducts2::class)->name('admin.products2');
 
 Route::get('products/create', CreateProduct::class)->name('admin.products.create');
 

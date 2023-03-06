@@ -64,4 +64,23 @@ class Product extends Model
         }
     }
 
-    }
+    public function getSalesAttribute()
+    {
+        $productId = $this->id;
+        $sales=0;
+
+        $orders = Order::select('content')->get()->map(function ($order){
+            return json_decode($order->content, true);
+        });
+
+        $products = $orders->collapse();
+
+            foreach ($products as $product){
+                if ($product['id'] == $productId) {
+                    $sales += $product['qty'];
+                }
+            }
+            return $sales;
+        }
+
+}

@@ -22,29 +22,33 @@
         </div>
         @if($products->count())
             <table class="min-w-full divide-y divide-gray-300">
-                {{--Seleccionar paginacion--}}
-                <div class="flex justify-star">
-                    <div class="mb-3 xl:w-96">
-                        <select class="form-control" wire:model="selectPage">
-                            <option value="" selected disabled>Seleccione paginación</option>
-                            @foreach ($pages as $page)
-                                <option value="{{ $page }}">{{ $page }}</option>
-                            @endforeach
-                        </select>
+                <div class="flex  justify-between p-5">
+                    {{--Seleccionar paginacion--}}
+                    <div class="flex justify-star">
+                        <div class="mb-3 xl:w-96">
+                            <select class="form-control" wire:model="selectPage">
+                                <option value="" selected disabled>Seleccione paginación</option>
+                                @foreach ($pages as $page)
+                                    <option value="{{ $page }}">{{ $page }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                {{--Visibilidad de columnas--}}
 
-                <div class="flex justify-star">
-                    <div class="mb-3 xl:w-96">
-                        @foreach ($columns as $column)
-                            <label class="flex items-center cursor-pointer">
-                                <input type="checkbox" wire:model="selectedColumn"
-                                       value="{{ $column }}">
-                                <span class="ml-1">{{ $column }}</span>
-                            </label>
-                        @endforeach
+                    {{--Visibilidad de columnas--}}
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center justify-between bg-indigo-500  px-4 py-2 text-sm font-medium text-white  rounded-md  focus:outline-none   focus:ring-indigo-500">
+                            <span>Visibilidad de columnas</span>
+                        </button>
+                        <div x-show="open" @click.away="open = false" class="absolute z-10 w-full mt-2 bg-white rounded-md shadow-lg">
+                            @foreach($columns as $column)
+                                <label class="block px-4 py-2 text-sm font-medium text-gray-700">
+                                    <input type="checkbox" wire:model="selectedColumn" value="{{ $column }}" class="mr-2 leading-tight">
+                                    <span class="text-gray-900">{{ $column }}</span>
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
 

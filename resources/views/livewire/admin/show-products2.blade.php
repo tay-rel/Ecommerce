@@ -55,36 +55,68 @@
                 <thead class="bg-gray-50">
                 <tr>
                     @if($this->showColumns('Nombre'))
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nombre
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                        <a wire:click.prevent="sortBy('name')" role="button" href="#">
+                            Nombre
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('name', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
                     @if($this->showColumns('Categoria'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Categoría
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        <a wire:click.prevent="sortBy('cName')" role="button" href="#">
+                            Categoría
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('cName', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
                     @if($this->showColumns('Estado'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                <a wire:click.prevent="sortBy('status')" role="button" href="#">
+                                    Estado
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('status', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
                     @if($this->showColumns('Precio'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                <a wire:click.prevent="sortBy('price')" role="button" href="#">
+                                    Precio
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('price', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
 
                     @if($this->showColumns('Marca'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Marca
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                <a wire:click.prevent="sortBy('bName')" role="button" href="#">
+                                    Marca
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('bName', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
                     @if($this->showColumns('Ventas'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nº Ventas
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                <a wire:click.prevent="sortBy('')" role="button" href="#">
+                                    Nº Ventas
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
                     @if($this->showColumns('Stock'))
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Stock disponible
+                                <a wire:click.prevent="sortBy('stock')" role="button" href="#">
+                            Categoría
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('stock', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
                     @if($this->showColumns('Fecha'))
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha de creación
+                                <a wire:click.prevent="sortBy('dateCreation')" role="button" href="#">
+                            Categoría
+                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('dateCreation', $sortField, $sortAsc) !!}
+                        </a>
                     @endif
                     </th>
 

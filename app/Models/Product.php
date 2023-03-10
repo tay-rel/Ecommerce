@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\ProductFilter;
+use App\Filters\QueryFilter;
 use App\Queries\ProductBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -83,4 +84,9 @@ class Product extends Model
             return $sales;
         }
 
+
+    public function scopeFilterBy($query, QueryFilter $filters, array $data)
+    {
+        return $filters->applyto($query, $data);
+    }
 }

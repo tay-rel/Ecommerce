@@ -23,9 +23,12 @@ class ShowProducts2 extends Component
     public $sortField = 'name';
     public $sortAsc = 'asc';
 
+    public $priceMin,$priceMax;
     public function mount()
     {
         $this->selectedColumn = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Ventas', 'Stock', 'Fecha'];
+        $this->priceMin = Product::min('price');
+        $this->priceMax =Product::max('price');
     }
 
     public function showColumns($column)
@@ -64,7 +67,8 @@ class ShowProducts2 extends Component
         $products = Product::query()
             ->filterBy($productFilter,[
                 'search' => $this->search,
-                'sort' => ['field' => $this->sortField, 'direction' => $this->sortAsc]
+                'sort' => ['field' => $this->sortField, 'direction' => $this->sortAsc],
+                'price'=>[$this->priceMin,$this->priceMax]
             ])->paginate($this->selectPage);
 
         $products->appends($productFilter->valid());

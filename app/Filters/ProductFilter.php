@@ -2,6 +2,8 @@
 
 namespace App\Filters;
 
+use App\Models\Product;
+
 class ProductFilter extends QueryFilter
 {
 
@@ -10,11 +12,19 @@ class ProductFilter extends QueryFilter
      return [
          'search' => 'filled',
          'sort' => 'filled|array',
+         'price' => 'array',
+         'price.0' => 'lte:' . Product::max('price'),
+         'price.1' => 'gte:' . Product::min('price'),
         ];
     }
-    public function Search($query, $search)
+    public function search($query, $search)
     {
         return  $query->where('name', 'like', "%{$search}%");
+    }
+
+    public function price($query, $price)
+    {
+        return $query->whereBetween('price', [$price[0],$price[1]]);
     }
     public function sort($query, $data)
     {

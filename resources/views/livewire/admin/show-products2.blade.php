@@ -20,6 +20,10 @@
                          type="text"
                          placeholder="Introduzca el nombre del producto a buscar" />
         </div>
+        {{--Filtros--}}
+        <div class="bg-white rounded border shadow-md p-2 px-4 font-normal z-99" x-show="open">
+            @include('livewire.admin.partials._filters')
+        </div>
         @if($products->count())
             <table class="min-w-full divide-y divide-gray-300">
                 <div class="flex  justify-between p-5">
@@ -50,6 +54,8 @@
                             @endforeach
                         </div>
                     </div>
+
+
                 </div>
 
                 <thead class="bg-gray-50">

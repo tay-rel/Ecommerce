@@ -26,6 +26,13 @@ class ProductFilter extends QueryFilter
     {
         return $query->whereBetween('price', [$price[0],$price[1]]);
     }
+
+    public function category($query,$category)
+    {
+        return $query->whereHas('subcategory.category', function($query) use ($category){
+            $query->where('id',$category);
+        });
+    }
     public function sort($query, $data)
     {
         $query->join('brands', 'brands.id', 'brand_id')

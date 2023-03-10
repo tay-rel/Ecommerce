@@ -104,17 +104,17 @@
                     @endif
                     </th>
                     @if($this->showColumns('Stock'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Stock disponible
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                 <a wire:click.prevent="sortBy('stock')" role="button" href="#">
-                            Categoría
+                                    Stock disponible
                             {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('stock', $sortField, $sortAsc) !!}
                         </a>
                     @endif
                     </th>
                     @if($this->showColumns('Fecha'))
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha de creación
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                 <a wire:click.prevent="sortBy('dateCreation')" role="button" href="#">
-                            Categoría
+                                    Fecha de creación
                             {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('dateCreation', $sortField, $sortAsc) !!}
                         </a>
                     @endif

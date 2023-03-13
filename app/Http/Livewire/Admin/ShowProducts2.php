@@ -52,6 +52,11 @@ class ShowProducts2 extends Component
     {
         $this->resetPage();
     }
+    public function updatedCategory()
+    {
+        $this->reset('subcategory');
+        $this->getSubcategories();
+    }
 
     public function sortBy($field)
     {

@@ -44,8 +44,8 @@
             </select>
             <div>
                 <h3 class="font-bold my-2">SUBCATEGORÍAS</h3>
-                <select wire:model="subcategory" name="subcategory" id="subcategory" class="h-10">
-                    <option value="">Selecciona subcategoría</option>
+                <select wire:model="subcategory" name="subcategory" id="subcategory">
+                    <option value="">Selecciona una subcategoría</option>
                     @foreach ($subcategories as $subcategory)
                         <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
                     @endforeach

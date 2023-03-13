@@ -16,6 +16,7 @@ class ProductFilter extends QueryFilter
          'price.0' => 'lte:' . Product::max('price'),
          'price.1' => 'gte:' . Product::min('price'),
          'category' => 'filled|exists:categories,id',
+         'subcategory' => 'filled|exists:subcategories,id',
         ];
     }
     public function search($query, $search)
@@ -34,6 +35,12 @@ class ProductFilter extends QueryFilter
             $query->where('id',$category);
         });
     }
+
+    public function subcategory($query,$subcategory)
+    {
+        return $query->where('subcategory_id', $subcategory);
+    }
+
     public function sort($query, $data)
     {
         $query->join('brands', 'brands.id', 'brand_id')

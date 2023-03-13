@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Models\Product;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
 class ProductFilter extends QueryFilter
@@ -19,6 +20,8 @@ class ProductFilter extends QueryFilter
          'category' => 'filled|exists:categories,id',
          'subcategory' => 'filled|exists:subcategories,id',
          'brand' => 'filled|exists:brands,id',
+         'from' => 'filled|date_format:Y-m-d',
+         'to' => 'filled|date_format:Y-m-d',
         // 'stock' => ['filled', Rule::in([0, 1, 2])]
         ];
     }
@@ -47,6 +50,18 @@ class ProductFilter extends QueryFilter
     public function brand($query, $brand)
     {
         return $query->where('brand_id', $brand);
+    }
+    public function from($query, $date)
+    {
+        $date = Carbon::createFromFormat('Y-m-d', $date);
+        $query->whereDate('products.created_at', '>=', $date);
+    }
+
+    public function to($query, $date)
+    {
+        $date = Carbon::createFromFormat('Y-m-d', $date);
+
+        $query->whereDate('products.created_at', '<=', $date);
     }
 
 //    public function stock($query, $stock)

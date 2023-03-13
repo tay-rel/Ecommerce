@@ -178,7 +178,7 @@
                             @endif
                         </td>
                                                 @if($this->showColumns('Fecha'))
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at }}
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at->format('d/m/Y') }}
                             @endif
                         </td>
 

@@ -21,6 +21,7 @@ class ShowProducts2 extends Component
     public $category;
     public $subcategory;
     public $brand;
+    public $from ,$to;
    // public $stock;
 
     public $subcategories = [];
@@ -95,6 +96,8 @@ class ShowProducts2 extends Component
                 'category'=>$this->category,
                 'subcategory' => $this->subcategory,
                 'brand' => $this->brand,
+                'from'=>$this->from,
+                'to'=>$this->to,
               //  'stock' => $this->stock,
             ])->paginate($this->selectPage);
 

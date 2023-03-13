@@ -33,7 +33,7 @@
         </div>
     </div>
     {{--categorias--}}
-    <div class="w-3/12 mx-10">
+    <div class="w-2/12 mx-10">
         <div>
             <h3 class="font-bold my-2">CATEGORÍAS</h3>
             <select wire:model="category" name="category" id="category">
@@ -76,7 +76,20 @@
                         </div>
                     @endforeach
                 </div>--}}
-
+            <div>
+                <div>
+                    <x-jet-label value="Desde" />
+                    <div class="flex items-center">
+                        <x-jet-input wire:model="from" type="date" />
+                    </div>
+                </div>
+                <div>
+                    <x-jet-label value="Hasta" />
+                    <div class="flex items-center">
+                        <x-jet-input wire:model="to" type="date" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

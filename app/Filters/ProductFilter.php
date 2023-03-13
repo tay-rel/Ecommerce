@@ -20,7 +20,7 @@ class ProductFilter extends QueryFilter
     }
     public function search($query, $search)
     {
-        return  $query->where('name', 'like', "%{$search}%");
+        return  $query->where('products.name', 'like', "%{$search}%");
     }
 
     public function price($query, $price)

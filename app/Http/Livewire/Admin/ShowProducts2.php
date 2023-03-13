@@ -68,6 +68,13 @@ class ShowProducts2 extends Component
         $this->getBrands();
     }
 
+
+    public function clearFilters()
+    {
+        $this->reset(['search', 'category','subcategory','brand','from','to','priceMin','priceMax']);
+        $this->resetPage();
+    }
+
     public function sortBy($field)
     {
         $this->sortAsc = ($this->sortField === $field) ? !$this->sortAsc : 'asc';

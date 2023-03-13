@@ -28,7 +28,7 @@
             <table class="min-w-full divide-y divide-gray-300">
                 <div class="flex  justify-between p-5">
                     {{--Seleccionar paginacion--}}
-                    <div class="flex justify-star">
+                    <div class="flex items-center ">
                         <div class="mb-3 xl:w-96">
                             <select class="form-control" wire:model="selectPage">
                                 <option value="" selected disabled>Seleccione paginación</option>
@@ -54,7 +54,12 @@
                             @endforeach
                         </div>
                     </div>
-
+                    {{--LImpia filtros--}}
+                    <div>
+                        <button wire:click="clearFilters()" class="flex items-center justify-between bg-indigo-500  px-4 py-2 text-sm font-medium text-white  rounded-md  focus:outline-none   focus:ring-indigo-500">
+                            <span>Limpiar Filtros</span>
+                        </button>
+                    </div>
 
                 </div>
 

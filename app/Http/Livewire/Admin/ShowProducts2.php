@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Filters\ProductFilter;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,8 +20,10 @@ class ShowProducts2 extends Component
     public $priceMin,$priceMax;
     public $category;
     public $subcategory;
+    public $brand;
 
     public $subcategories = [];
+    public $brands = [];
 
     public $pages = [5,10,15,25,50,100];
     public $selectPage=5;
@@ -37,6 +41,7 @@ class ShowProducts2 extends Component
         $this->priceMin = Product::min('price');
         $this->priceMax =Product::max('price');
         $this->getSubcategories();
+        $this->getBrands();
     }
 
     public function showColumns($column)
@@ -54,8 +59,9 @@ class ShowProducts2 extends Component
     }
     public function updatedCategory()
     {
-        $this->reset('subcategory');
+        $this->reset(['subcategory', 'brand']);
         $this->getSubcategories();
+        $this->getBrands();
     }
 
     public function sortBy($field)
@@ -85,6 +91,7 @@ class ShowProducts2 extends Component
                 'price'=>[$this->priceMin,$this->priceMax],
                 'category'=>$this->category,
                 'subcategory' => $this->subcategory,
+                'brand' => $this->brand,
             ])->paginate($this->selectPage);
 
         $products->appends($productFilter->valid());
@@ -96,6 +103,12 @@ class ShowProducts2 extends Component
         $this->subcategories = Subcategory::where('category_id', $this->category)->get();
     }
 
+    public function getBrands()
+    {
+        $this->brands = Brand::whereHas('categories', function (Builder $query) {
+            return $query->where('category_id', $this->category);
+        })->get();
+    }
 
     public function render(ProductFilter $productFilter)
     {

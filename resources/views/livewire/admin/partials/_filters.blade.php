@@ -33,15 +33,16 @@
         </div>
     </div>
     {{--categorias--}}
-    <div class="w-2/12">
+    <div class="w-3/12 mx-10">
         <div>
             <h3 class="font-bold my-2">CATEGORÍAS</h3>
-            <select wire:model="category" name="category" id="category" class="h-10">
-                <option value="">Selecciona categoría</option>
+            <select wire:model="category" name="category" id="category">
+                <option value="">Selecciona una categoría</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
+
             <div>
                 <h3 class="font-bold my-2">SUBCATEGORÍAS</h3>
                 <select wire:model="subcategory" name="subcategory" id="subcategory">
@@ -53,5 +54,17 @@
             </div>
         </div>
     </div>
+    <div class="w-3/12 mx-10">
+        <div>
+            <h3 class="font-bold my-2">MARCAS</h3>
+            <select wire:model="brand" name="brand" id="brand">
+                <option value="">Selecciona una marca</option>
+                @foreach ($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                @endforeach
+            </select>
 
+
+        </div>
+    </div>
 </div>

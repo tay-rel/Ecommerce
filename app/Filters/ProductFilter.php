@@ -15,6 +15,7 @@ class ProductFilter extends QueryFilter
          'price' => 'array',
          'price.0' => 'lte:' . Product::max('price'),
          'price.1' => 'gte:' . Product::min('price'),
+         'category' => 'filled|exists:categories,id',
         ];
     }
     public function search($query, $search)

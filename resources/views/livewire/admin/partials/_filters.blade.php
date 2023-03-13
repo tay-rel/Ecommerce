@@ -63,7 +63,19 @@
                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                 @endforeach
             </select>
+            {{--<div class="flex flex-col justify-center">
+                <h3 class="font-bold my-2">STOCK</h3>
+                <div class="form-check">
+                    @foreach ($stockList as $key => $value)
+                        <div class="form-check form-check-inline">
+                            <input wire:model="stock" type="radio" class="form-check-input" name="stock" id="stock_{{ $key ?: 'all' }}"
+                                   value="{{ $key }}">
 
+                            <label class="form-check-label"
+                                   for="stock_{{ $key ?: 'all' }}">De {{ $value[0] }} a {{ $value[1] }}</label>
+                        </div>
+                    @endforeach
+                </div>--}}
 
         </div>
     </div>

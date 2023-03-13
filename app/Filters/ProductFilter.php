@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Models\Product;
+use Illuminate\Validation\Rule;
 
 class ProductFilter extends QueryFilter
 {
@@ -18,6 +19,7 @@ class ProductFilter extends QueryFilter
          'category' => 'filled|exists:categories,id',
          'subcategory' => 'filled|exists:subcategories,id',
          'brand' => 'filled|exists:brands,id',
+        // 'stock' => ['filled', Rule::in([0, 1, 2])]
         ];
     }
     public function search($query, $search)
@@ -47,6 +49,27 @@ class ProductFilter extends QueryFilter
         return $query->where('brand_id', $brand);
     }
 
+//    public function stock($query, $stock)
+//    {
+//        $range = config('stock')['stock'][$stock];
+//
+//        return $query->whereBetween('quantity', [$range[0], $range[1]])
+//            ->whereHas('subcategory', function ($query) {
+//                $query->where('color', false);
+//            })
+//
+//            ->orWhere(function ($query) use ($range) {
+//                $query->orWhereHas('colors', function ($query) use ($range) {
+//                    $query->groupBy('product_id')->havingRaw('sum(quantity) >= ? and sum(quantity) < ?', [$range[0], $range[1]]);
+//                })
+//                    ->whereHas('subcategory', function ($query) {
+//                        $query->where('color', true)->where('size', false);
+//                    });
+//            })
+//            ->orWhereHas('sizes.colors', function ($query) use ($range) {
+//                $query->groupBy('size_id')->havingRaw('sum(quantity) >= ? and sum(quantity) < ?', [$range[0], $range[1]]);
+//            });
+//    }
     public function sort($query, $data)
     {
         $query->join('brands', 'brands.id', 'brand_id')

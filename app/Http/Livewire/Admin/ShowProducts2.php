@@ -21,9 +21,11 @@ class ShowProducts2 extends Component
     public $category;
     public $subcategory;
     public $brand;
+   // public $stock;
 
     public $subcategories = [];
     public $brands = [];
+   // public $stockList;
 
     public $pages = [5,10,15,25,50,100];
     public $selectPage=5;
@@ -42,6 +44,7 @@ class ShowProducts2 extends Component
         $this->priceMax =Product::max('price');
         $this->getSubcategories();
         $this->getBrands();
+      //  $this->stockList = config('stock.stock');
     }
 
     public function showColumns($column)
@@ -92,6 +95,7 @@ class ShowProducts2 extends Component
                 'category'=>$this->category,
                 'subcategory' => $this->subcategory,
                 'brand' => $this->brand,
+              //  'stock' => $this->stock,
             ])->paginate($this->selectPage);
 
         $products->appends($productFilter->valid());

@@ -1,4 +1,4 @@
-<div class="mb-2 flex ">
+<div class="mb-2 flex py-4">
     {{--precio--}}
     <div class="sidebar__block">
         <h3 class="sidebar__title font-bold">PRECIO</h3>

@@ -21,7 +21,7 @@
                          placeholder="Introduzca el nombre del producto a buscar" />
         </div>
         {{--Filtros--}}
-        <div class="bg-white rounded border shadow-md p-2 px-4 font-normal z-99" x-show="open">
+        <div class="bg-white rounded border shadow-md p-2 px-4 font-normal z-99">
             @include('livewire.admin.partials._filters')
         </div>
         @if($products->count())
@@ -38,7 +38,6 @@
                             </select>
                         </div>
                     </div>
-
 
                     {{--Visibilidad de columnas--}}
                     <div class="relative" x-data="{ open: false }">
@@ -183,7 +182,7 @@
                             @endif
                         </td>
                                                 @if($this->showColumns('Fecha'))
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at->format('d/m/Y') }}
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at->translatedFormat('D M Y H:m') }}
                             @endif
                         </td>
 

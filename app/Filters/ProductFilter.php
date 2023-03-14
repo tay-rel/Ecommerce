@@ -37,9 +37,7 @@ class ProductFilter extends QueryFilter
 
     public function category($query,$category)
     {
-        return $query->whereHas('subcategory.category', function($query) use ($category){
-            $query->where('id',$category);
-        });
+     $query->category($category);
     }
 
     public function subcategory($query,$subcategory)
@@ -53,14 +51,11 @@ class ProductFilter extends QueryFilter
     }
     public function from($query, $date)
     {
-        $date = Carbon::createFromFormat('Y-m-d', $date);
         $query->whereDate('products.created_at', '>=', $date);
     }
 
     public function to($query, $date)
     {
-        $date = Carbon::createFromFormat('Y-m-d', $date);
-
         $query->whereDate('products.created_at', '<=', $date);
     }
 
@@ -87,12 +82,6 @@ class ProductFilter extends QueryFilter
 //    }
     public function sort($query, $data)
     {
-        $query->join('brands', 'brands.id', 'brand_id')
-            ->join('subcategories', 'subcategories.id', 'subcategory_id')
-            ->join('categories', 'categories.id', 'category_id')
-            ->select('products.*', 'categories.name as cName',
-                'subcategories.name as sName', 'brands.name as bName',
-                'products.quantity as stock', 'products.created_at as dateCreation')
-            ->orderBy($data['field'], $data['direction'] ? 'asc' : 'desc');
+        $query->sort($data);
     }
 }

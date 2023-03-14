@@ -37,7 +37,18 @@ class ShowProducts2 extends Component
     public $sortField = 'name';
     public $sortAsc = 'asc';
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'page' => ['except' => 1],
+        'category' => ['except' => ''],
+        'subcategory' => ['except' => ''],
+        'brand' => ['except' => ''],
+        'priceMin' => ['except' => ' '],
+        'priceMax' => ['except' => ' '],
+        'from' => ['except' => ''],
+        'to' => ['except' => ''],
 
+    ];
     public function mount()
     {
         $this->selectedColumn = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Ventas', 'Stock', 'Fecha'];

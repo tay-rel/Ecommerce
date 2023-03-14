@@ -84,9 +84,4 @@ class Product extends Model
             return $sales;
         }
 
-
-    public function scopeFilterBy($query, QueryFilter $filters, array $data)
-    {
-        return $filters->applyto($query, $data);
-    }
 }

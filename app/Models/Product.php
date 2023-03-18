@@ -84,4 +84,41 @@ class Product extends Model
             return $sales;
         }
 
+
+     public function getColorQuantitiesAttribute()
+    {
+        $colorQuantities = [];
+
+        if (!$this->subcategory->color) {//sin color
+            $colorQuantities['No tiene '] = 'Color';
+        } else{
+            if (!$this->subcategory->size) {//color
+                foreach ($this->colors as $color) {
+                    $colorQuantities[$color->name] = $color->pivot->quantity;
+                }
+            } else {
+                foreach ($this->sizes as $size) {//color y talla
+                    foreach ($size->colors as $color) {
+                        $colorQuantities[$color->name] = $color->pivot->quantity;
+                    }
+                }
+            }
+        }
+
+        return $colorQuantities;
+    }
+    public function getSizeQuantitiesAttribute()
+    {
+        $sizeQuantities = [];
+
+        if (!$this->subcategory->size) {//sin talla
+            $sizeQuantities['No tiene '] = 'Talla';
+        } else{
+                foreach ($this->sizes as $size) {//color y talla
+                        $sizeQuantities[$size->name] =  array_sum($size->colors->pluck('pivot')->pluck('quantity')->all());;
+                }
+        }
+
+        return $sizeQuantities;
+    }
 }

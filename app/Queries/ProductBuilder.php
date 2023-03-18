@@ -12,13 +12,22 @@ class ProductBuilder extends QueryBuilder
     }
     public function sort( $data)
     {
-        $this->join('brands', 'brands.id', 'brand_id')
+        return $this->join('brands', 'brands.id', 'brand_id')
             ->join('subcategories', 'subcategories.id', 'subcategory_id')
             ->join('categories', 'categories.id', 'category_id')
             ->select('products.*', 'categories.name as cName',
                 'subcategories.name as sName', 'brands.name as bName',
                 'products.quantity as stock', 'products.created_at as dateCreation')
             ->orderBy($data['field'], $data['direction'] ? 'asc' : 'desc');
+    }
+
+    public function color($id)
+    {
+        $this->whereHas('colors', function($q) use ($id){
+            $q->where('colors.id',$id);
+        })->orWhereHas('sizes.colors', function($q) use ($id){
+            $q->where('colors.id', $id);
+        })->get();//para ejecutar la consulta y devolver los resultados.
     }
 
 }

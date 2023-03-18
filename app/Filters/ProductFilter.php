@@ -59,6 +59,10 @@ class ProductFilter extends QueryFilter
         $query->whereDate('products.created_at', '<=', $date);
     }
 
+    public function colors($query,$id)
+    {
+            $query->color($id);
+    }
 //    public function stock($query, $stock)
 //    {
 //        $range = config('stock')['stock'][$stock];

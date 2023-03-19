@@ -23,11 +23,21 @@ class ProductBuilder extends QueryBuilder
 
     public function color($id)
     {
-        $this->whereHas('colors', function($q) use ($id){
-            $q->where('colors.id',$id);
-        })->orWhereHas('sizes.colors', function($q) use ($id){
-            $q->where('colors.id', $id);
-        })->get();//para ejecutar la consulta y devolver los resultados.
+        $this->whereHas('colors', function ($query) use ($id) {
+            $query->where('colors.id', $id);
+        })->orWhereHas('sizes', function ($query) use ($id) {
+            $query->where(function ($query) use ($id) {
+                $query->whereHas('colors', function ($query) use ($id) {
+                    $query->where('color_id', $id);
+                });
+            });
+        });
     }
 
+    public function size($name)
+    {
+        $this->whereHas('sizes', function($q) use ($name){
+            $q->where('sizes.name',$name);
+        });
+    }
 }

@@ -106,28 +106,25 @@
                                        </th>
                               @if($this->showColumns('Color'))
                                        <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                             <a wire:click.prevent="sortBy('')" role="button" href="#">
-                                                    Color
-                                                    {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
+                                           class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                           <a wire:click.prevent="" role="button" href="#">
+                                               Color
                                              </a>
                                  @endif
                                          </th>
                                  @if($this->showColumns('Talla'))
-                                          <th scope="col"
+                                                <th scope="col"
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                              <a wire:click.prevent="sortBy('')" role="button" href="#">
+                                                    <a wire:click.prevent="" role="button" href="#">
                                                         Talla
-                                                 {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
                                                </a>
                                    @endif
                                             </th>
                                    @if($this->showColumns('Ventas'))
                                               <th scope="col"
                                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                              <a wire:click.prevent="sortBy('')" role="button" href="#">
+                                              <a wire:click.prevent="" role="button" href="#">
                                                             Nº Ventas
-                                                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
                                               </a>
                                       @endif
                                                </th>

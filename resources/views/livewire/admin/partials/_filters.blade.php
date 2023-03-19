@@ -92,5 +92,41 @@
             </div>
         </div>
     </div>
+    <div class="w3/12 mx-10">
+        <div>
+            <div>
+                <h3 class="font-bold my-2 ">COLOR</h3>
+                <select wire:model="color" name="color" id="color" class="h-10">
+                    <option value="">Selecciona un color</option>
+                    @foreach ($colors as $color)
+                        <option value="{{ $color->id }}">{{ $color->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <h3 class="font-bold my-2">TALLA</h3>
+                <select wire:model="size" name="size" id="size" class="h-10">
+                    <option value="">Selecciona una talla</option>
+                    @foreach ($sizes as $size)
+                        <option value="{{ $size }}">{{ $size }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex flex-col justify-center">
+                <h3 class="font-bold my-2">STATUS</h3>
+                <div class="form-check">
+                    @foreach ($statusList as $key => $value)
+                        <div class="form-check form-check-inline">
+                            <input wire:model="status" type="radio" class="form-check-input" name="status"
+                                   id="status_{{ $key ?: 'all' }}" value="{{ $value }}">
+
+                            <label class="form-check-label" for="status_{{ $key ?: 'all' }}">{{ $key }}</label>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>

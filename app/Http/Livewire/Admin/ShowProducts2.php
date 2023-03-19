@@ -5,7 +5,9 @@ namespace App\Http\Livewire\Admin;
 use App\Filters\ProductFilter;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
@@ -22,10 +24,13 @@ class ShowProducts2 extends Component
     public $subcategory;
     public $brand;
     public $from ,$to;
+    public $color ,$size,$status;
    // public $stock;
 
     public $subcategories = [];
     public $brands = [];
+    public $colors = [];
+    public $sizes = [];
    // public $stockList;
 
     public $pages = [5,10,15,25,50,100];
@@ -47,6 +52,9 @@ class ShowProducts2 extends Component
         'priceMax' => ['except' => ' '],
         'from' => ['except' => ''],
         'to' => ['except' => ''],
+        'color' => ['except' => ''],
+        'size' => ['except' => ''],
+        'status' => ['except' => ''],
 
     ];
     public function mount()
@@ -56,6 +64,12 @@ class ShowProducts2 extends Component
         $this->priceMax =Product::max('price');
         $this->getSubcategories();
         $this->getBrands();
+        $this->sizes = array_unique(Size::all()->pluck('name')->all());
+        $this->colors = Color::all();
+        $this->statusList = [
+            'borrador' => Product::BORRADOR,
+            'publicado' => Product::PUBLICADO
+        ];
       //  $this->stockList = config('stock.stock');
     }
 
@@ -82,7 +96,7 @@ class ShowProducts2 extends Component
 
     public function clearFilters()
     {
-        $this->reset(['search', 'category','subcategory','brand','from','to','priceMin','priceMax']);
+        $this->reset(['search', 'category','subcategory','brand','from','to','priceMin','priceMax','color','size','status']);
         $this->resetPage();
     }
 
@@ -116,6 +130,9 @@ class ShowProducts2 extends Component
                 'brand' => $this->brand,
                 'from'=>$this->from,
                 'to'=>$this->to,
+                'color'=>$this->color,
+                'size'=>$this->size,
+                'status' => $this->status,
               //  'stock' => $this->stock,
             ])->paginate($this->selectPage);
 

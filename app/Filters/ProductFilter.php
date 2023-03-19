@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
@@ -22,6 +23,12 @@ class ProductFilter extends QueryFilter
          'brand' => 'filled|exists:brands,id',
          'from' => 'filled|date_format:Y-m-d',
          'to' => 'filled|date_format:Y-m-d',
+         'color' => 'filled',
+         'size' => 'filled|in:'. Size::all()->pluck('name'),
+         'status' => [
+             'filled',
+             Rule::in([Product::BORRADOR, Product::PUBLICADO])
+         ],
         // 'stock' => ['filled', Rule::in([0, 1, 2])]
         ];
     }
@@ -59,9 +66,14 @@ class ProductFilter extends QueryFilter
         $query->whereDate('products.created_at', '<=', $date);
     }
 
-    public function colors($query,$id)
+    public function color($query,$id)
     {
             $query->color($id);
+    }
+
+    public function size($query,$name)
+    {
+        $query->size($name);
     }
 //    public function stock($query, $stock)
 //    {

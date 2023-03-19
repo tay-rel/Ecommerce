@@ -10,10 +10,8 @@
         </div>
     </x-slot>
 
-
     <x-table-responsive>
         <!--Buscador-->
-
         <div class="px-6 py-4">
             <x-jet-input class="w-full"
                          wire:model="search"
@@ -38,7 +36,6 @@
                             </select>
                         </div>
                     </div>
-
                     {{--Visibilidad de columnas--}}
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open"
@@ -63,9 +60,7 @@
                             <span>Limpiar Filtros</span>
                         </button>
                     </div>
-
                 </div>
-
                 <thead class="bg-gray-50">
                 <tr>
                     @if($this->showColumns('Nombre'))
@@ -74,7 +69,7 @@
                                 Nombre
                                 {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('name', $sortField, $sortAsc) !!}
                             </a>
-                            @endif
+                     @endif
                         </th>
                         @if($this->showColumns('Categoria'))
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -82,80 +77,86 @@
                                     Categoría
                                     {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('cName', $sortField, $sortAsc) !!}
                                 </a>
-                                @endif
+                          @endif
                             </th>
-                            @if($this->showColumns('Estado'))
+                        @if($this->showColumns('Estado'))
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     <a wire:click.prevent="sortBy('status')" role="button" href="#">
                                         Estado
                                         {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('status', $sortField, $sortAsc) !!}
                                     </a>
-                                    @endif
+                          @endif
                                 </th>
-                                @if($this->showColumns('Precio'))
+                          @if($this->showColumns('Precio'))
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         <a wire:click.prevent="sortBy('price')" role="button" href="#">
                                             Precio
                                             {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('price', $sortField, $sortAsc) !!}
                                         </a>
-                                        @endif
+                            @endif
                                     </th>
-                                        @if($this->showColumns('Marca'))
-                                            <th scope="col"
+                            @if($this->showColumns('Marca'))
+                                      <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                            <a wire:click.prevent="sortBy('bName')" role="button" href="#">
+                                                Marca
+                                                {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('bName', $sortField, $sortAsc) !!}
+                                            </a>
+                            @endif
+                                       </th>
+                              @if($this->showColumns('Color'))
+                                       <th scope="col"
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                <a wire:click.prevent="sortBy('bName')" role="button" href="#">
-                                                    Marca
-                                                    {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('bName', $sortField, $sortAsc) !!}
-                                                </a>
-                                                @endif
-                                            </th>
-
-                                            <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-
+                                             <a wire:click.prevent="sortBy('')" role="button" href="#">
                                                     Color
-
-                                            </th>
-
-                                                <th scope="col"
+                                                    {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
+                                             </a>
+                                 @endif
+                                         </th>
+                                 @if($this->showColumns('Talla'))
+                                          <th scope="col"
                                                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-
+                                              <a wire:click.prevent="sortBy('')" role="button" href="#">
                                                         Talla
-
-                                                </th>
-                                            @if($this->showColumns('Ventas'))
-                                                <th scope="col"
-                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    <a wire:click.prevent="sortBy('')" role="button" href="#">
-                                                        Nº Ventas
-                                                        {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
-                                                    </a>
-                                                    @endif
-                                                </th>
-                                                @if($this->showColumns('Stock'))
-                                                    <th scope="col"
+                                                 {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
+                                               </a>
+                                   @endif
+                                            </th>
+                                   @if($this->showColumns('Ventas'))
+                                              <th scope="col"
                                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                        <a wire:click.prevent="sortBy('stock')" role="button" href="#">
-                                                            Stock disponible
-                                                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('stock', $sortField, $sortAsc) !!}
-                                                        </a>
-                                                        @endif
-                                                    </th>
-                                                    @if($this->showColumns('Fecha'))
-                                                        <th scope="col"
+                                              <a wire:click.prevent="sortBy('')" role="button" href="#">
+                                                            Nº Ventas
+                                                            {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('', $sortField, $sortAsc) !!}
+                                              </a>
+                                      @endif
+                                               </th>
+                                        @if($this->showColumns('Stock'))
+                                                <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                            <a wire:click.prevent="sortBy('dateCreation')" role="button"
+                                                    <a wire:click.prevent="sortBy('stock')" role="button"
                                                                href="#">
-                                                                Fecha de creación
-                                                                {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('dateCreation', $sortField, $sortAsc) !!}
-                                                            </a>
-                                                            @endif
-                                                        </th>
+                                                                Stock disponible
+                                                                {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('stock', $sortField, $sortAsc) !!}
+                                                    </a>
+                                        @endif
+                                                   </th>
+                                       @if($this->showColumns('Fecha'))
+                                                   <th scope="col"
+                                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                        <a wire:click.prevent="sortBy('dateCreation')"
+                                                                   role="button"
+                                                                   href="#">
+                                                                    Fecha de creación
+                                                                    {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('dateCreation', $sortField, $sortAsc) !!}
+                                                        </a>
+                                           @endif
+                                                    </th>
 
-                                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                                            <span class="sr-only">Editar</span>
-                                                        </th>
-                </tr>
+                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                                     <span class="sr-only">Editar</span>
+                                       </th>
+                    </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                 @foreach($products as $product)
@@ -196,41 +197,45 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $product->brand->name }}
                                             @endif
                                         </td>
+                                        @if($this->showColumns('Color'))
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                 <div class="text-sm text-rigth">
-                                                     <ul>
-                                                         @foreach ($product->colorQuantities as $colorName => $quantity)
-                                                             <li>{{ $colorName }}: {{ $quantity }}</li>
-                                                         @endforeach
-                                                     </ul>
-                                                 </div>
-                                            </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <div class="text-sm text-rigth">
-                                                <ul>
-                                                    @foreach ($product->sizeQuantities as $sizeName => $quantity)
-                                                        <li>{{ $sizeName }}: {{ $quantity }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </td>
-                                        @if($this->showColumns('Ventas'))
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->sales }}
+                                                <div class="text-sm text-rigth">
+                                                    <ul>
+                                                        @foreach ($product->colorQuantities as $colorName => $quantity)
+                                                            <li>{{ $colorName }}: {{ $quantity }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                                 @endif
                                             </td>
-                                            @if($this->showColumns('Stock'))
-                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->stock }}
+                                            @if($this->showColumns('Talla'))
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <div class="text-sm text-rigth">
+                                                        <ul>
+                                                            @foreach ($product->sizeQuantities as $sizeName => $quantity)
+                                                                <li>{{ $sizeName }}: {{ $quantity }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                     @endif
                                                 </td>
-                                                @if($this->showColumns('Fecha'))
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at->translatedFormat('D M Y H:m') }}
+                                                @if($this->showColumns('Ventas'))
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->sales }}
                                                         @endif
                                                     </td>
+                                                    @if($this->showColumns('Stock'))
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->stock }}
+                                                            @endif
+                                                        </td>
+                                                        @if($this->showColumns('Fecha'))
+                                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->created_at->translatedFormat('D M Y H:m') }}
+                                                                @endif
+                                                            </td>
 
-                                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                        <a href="{{ route('admin.products.edit', $product) }}"
-                                                           class="text-indigo-600 hover:text-indigo-900">Editar</a>
-                                                    </td>
+                                                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                                <a href="{{ route('admin.products.edit', $product) }}"
+                                                                   class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                                            </td>
                     </tr>
                 @endforeach
                 <!-- More people... -->

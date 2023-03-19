@@ -31,7 +31,7 @@ class ShowProducts2 extends Component
     public $pages = [5,10,15,25,50,100];
     public $selectPage=5;
 
-    public $columns = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Ventas', 'Stock', 'Fecha'];
+    public $columns = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Color','Talla','Ventas', 'Stock', 'Fecha'];
     public $selectedColumn = [];
 
     public $sortField = 'name';
@@ -51,7 +51,7 @@ class ShowProducts2 extends Component
     ];
     public function mount()
     {
-        $this->selectedColumn = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Ventas', 'Stock', 'Fecha'];
+        $this->selectedColumn = ['Imagen', 'Nombre','Categoria','Estado','Precio','Marca','Color','Talla','Ventas', 'Stock', 'Fecha'];
         $this->priceMin = Product::min('price');
         $this->priceMax =Product::max('price');
         $this->getSubcategories();

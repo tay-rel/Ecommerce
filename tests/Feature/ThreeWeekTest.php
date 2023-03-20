@@ -381,8 +381,12 @@ class ThreeWeekTest extends TestCase
             'imageable_type' => Product::class
         ]);
 
-        $departamento1 =Department::factory()->create();
-        $departamento2 =Department::factory()->create();
+        $departamento1 =Department::factory()->create([
+            'name'=>'depart1'
+        ]);
+        $departamento2 =Department::factory()->create([
+            'name'=>'depart2'
+        ]);
 
         $ciudad1=City::factory()->create([
             'name'=>'ciudad1',
@@ -394,9 +398,11 @@ class ThreeWeekTest extends TestCase
         ]);
 
         $distrito1=District::factory()->create([
+            'name'=>'dis1',
             'city_id'=>$ciudad1->id
         ]);
         $distrito2=District::factory()->create([
+            'name'=>'dis2',
             'city_id'=>$ciudad2->id
         ]);
 

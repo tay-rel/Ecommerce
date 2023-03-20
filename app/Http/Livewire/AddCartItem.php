@@ -35,6 +35,10 @@ class AddCartItem extends Component
     }
     public function addItem()
     {
+        $this->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
         Cart::add([
             'id' => $this->product->id,
             'name' => $this->product->name,
@@ -53,6 +57,13 @@ class AddCartItem extends Component
         //que se ha producido este hecho, y así el numerito del carrito aumente sin tener que actualizar la página
         $this->emitTo('dropdown-cart', 'render');//cuyo primer parámetro es a que vista queremos llamar y como se llama el evento
     }
+    public function verifyQuantity()
+    {
+        if ($this->product->quantity > 0) {
+            $this->addItem();
+        }
+    }
+
     public function render()
     {
         return view('livewire.add-cart-item');

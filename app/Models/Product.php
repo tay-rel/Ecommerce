@@ -70,7 +70,7 @@ class Product extends Model
         $productId = $this->id;
         $sales=0;
 
-        $orders = Order::select('content')->get()->map(function ($order){
+        $orders = Order::select('content')->where('status', 2)->get()->map(function ($order){
             return json_decode($order->content, true);
         });
 
@@ -84,6 +84,26 @@ class Product extends Model
             return $sales;
         }
 
+    public function getUnconfirmedAttribute()
+    {
+        $id = $this->id;
+        $orders = Order::select('content')->where('status', 1)->get();
+        $i = 0;
+
+        foreach($orders as $order) {
+            $orders[$i] = json_decode($order->content, true);
+            $i++;
+        }
+        $products = $orders->collapse();
+        $counter = 0;
+        foreach ($products as $product) {
+
+            if ($product['id'] == $id) {
+                $counter = $counter + $product['qty'];
+            };
+        }
+        return $counter;
+    }
 
      public function getColorQuantitiesAttribute()
     {

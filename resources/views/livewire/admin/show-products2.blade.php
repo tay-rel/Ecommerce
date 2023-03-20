@@ -123,11 +123,21 @@
                                    @if($this->showColumns('Ventas'))
                                               <th scope="col"
                                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                              <a wire:click.prevent="" role="button" href="#">
-                                                            Nº Ventas
-                                              </a>
+                                                  <a wire:click.prevent="sortBy('Ventas')" role="button" href="#">
+                                                      Vendidos
+                                                      {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('Ventas', $sortField, $sortAsc) !!}
+                                                  </a>
                                       @endif
                                                </th>
+                                                    @if($this->showColumns('NoConfirmados'))
+                                                        <th scope="col"
+                                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                            <a wire:click.prevent="sortBy('NoConfirmados')" role="button" href="#">
+                                                                No confirmados
+                                                                {!! \App\Http\Livewire\Admin\ShowProducts2::sortIcon('NoConfirmados', $sortField, $sortAsc) !!}
+                                                            </a>
+                                                            @endif
+                                                        </th>
                                         @if($this->showColumns('Stock'))
                                                 <th scope="col"
                                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -220,6 +230,10 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->sales }}
                                                         @endif
                                                     </td>
+                                                    @if($this->showColumns('NoConfirmados'))
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->unconfirmed }}
+                                                            @endif
+                                                        </td>
                                                     @if($this->showColumns('Stock'))
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">{{ $product->stock }}
                                                             @endif
